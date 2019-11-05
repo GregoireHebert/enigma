@@ -1,0 +1,5 @@
+App\Entity\Selection:
+  selection_{1..200}:
+    myOrder: '@order_*'
+    product: '@product_*'
+    quantity: <numberBetween(1,3)>
