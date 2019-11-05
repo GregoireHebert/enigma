@@ -29,7 +29,7 @@ class OrderUpdateStatus
 
         if (!$constraintViolationList->count()) {
             // add flash bag succès
-            $flashbag->add('success', 'Status mis à jour avec susccès.');
+            $flashbag->add('success', 'Status mis à jour avec succès.');
             $orderRepository->save($order);
 
             return new RedirectResponse(

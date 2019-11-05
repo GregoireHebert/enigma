@@ -2,6 +2,8 @@
 
 {% block body %}
 <div class="container">
+    {{ 'ma.traduction'|trans({}, 'order') }}
+
     {% for error in app.flashes('error') %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ error }}
