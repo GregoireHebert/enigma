@@ -15,3 +15,7 @@ orders_detail:
   path: /orders/{id}
   controller: App\Controller\OrderDetail
   methods: ["GET"]
+
+order_update_status:
+  path: /orders/{id}/status/{status}
+  controller: App\Controller\OrderUpdateStatus

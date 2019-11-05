@@ -14,7 +14,16 @@
         <div class="col-sm-4 text-center">
             <h2>
                 #{{ order.number }}<br/>
-                <span class="badge badge-primary">{{ order.status }}</span><br/>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ order.status }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('order_update_status', {id: order.number, status:'En préparation' }) }}">En préparation</a>
+                        <a class="dropdown-item" href="{{ path('order_update_status', {id: order.number, status:'Prêt' }) }}">Prêt</a>
+                        <a class="dropdown-item" href="{{ path('order_update_status', {id: order.number, status:'Emporté' }) }}">Emporté</a>
+                    </div>
+                </div><br/>
                 <em>{{ order.amount }}€</em><br/>
                 <a href="{{ path('orders_list') }}" class="btn btn-primary">Retour</a>
             </h2>
