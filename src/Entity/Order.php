@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass=OrderRepository::class)
  * @ORM\Table(name="`order`")
  */
 class Order
@@ -33,7 +34,7 @@ class Order
     private $amount;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Selection", mappedBy="myOrder", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Selection", mappedBy="myOrder", orphanRemoval=true, fetch="EAGER")
      */
     private $selections;
 

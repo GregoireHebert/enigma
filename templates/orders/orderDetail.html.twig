@@ -6,8 +6,8 @@
         <div class="col-sm-8">
             <h1>Votre commande</h1>
             <ul class="list-group">
-            {% for product in order.products %}
-                <li class="list-group-item">{{ product.name }} x{{ product.quantity }}</li>
+            {% for selection in order.selections %}
+                <li class="list-group-item">{{ selection.product.name }} x{{ selection.quantity }}</li>
             {% endfor %}
             </ul>
         </div>

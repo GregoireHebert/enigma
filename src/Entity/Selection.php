@@ -23,7 +23,7 @@ class Selection
     private $myOrder;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
