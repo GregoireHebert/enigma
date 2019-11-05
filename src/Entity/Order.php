@@ -8,6 +8,7 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -25,11 +26,16 @@ class Order
     /**
      * @var string
      * @ORM\Column
+     * @Assert\Choice({"En préparation", "Prêt", "Emporté"})
+     * @Assert\NotBlank()
      */
     private $status;
     /**
      * @var int
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\GreaterThan(0)
+     * @Assert\Type("integer")
      */
     private $amount;
 
