@@ -15,7 +15,8 @@
             <h2>
                 #{{ order.number }}<br/>
                 <span class="badge badge-primary">{{ order.status }}</span><br/>
-                <em>{{ order.amount }}€</em>
+                <em>{{ order.amount }}€</em><br/>
+                <a href="{{ path('orders_list') }}" class="btn btn-primary">Retour</a>
             </h2>
         </div>
     </div>
