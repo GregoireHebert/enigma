@@ -4,18 +4,28 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity()
+ */
 class Order
 {
     /**
      * @var int
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
      */
     private $number;
     /**
      * @var string
+     * @ORM\Column
      */
     private $status;
     /**
      * @var int
+     * @ORM\Column(type="integer")
      */
     private $amount;
 
