@@ -13,12 +13,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% for order in orders %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>10€</td>
-                        <td>En préparation</td>
-                        <td><a href="{{ path('orders_detail', {id: 1}) }}" class="btn btn-primary">Voir</a></td>
+                        <th scope="row">{{ order.number }}</th>
+                        <td>{{ order.amount }}€</td>
+                        <td>{{ order.status }}</td>
+                        <td><a href="{{ path('orders_detail', {id: order.number}) }}" class="btn btn-primary">Voir</a></td>
                     </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
