@@ -1,0 +1,16 @@
+App\Entity\Product:
+  product_burger:
+    name: burger
+    price: 4
+
+  product_cbo:
+    name: cbo
+    price: 5
+
+  product_coca:
+    name: coca
+    price: 2
+
+  product_frite:
+    name: frite
+    price: 1
