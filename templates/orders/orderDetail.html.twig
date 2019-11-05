@@ -1,5 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    Détail
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1>Votre commande</h1>
+            <ul class="list-group">
+                <li class="list-group-item">Burger x1</li>
+                <li class="list-group-item">Frite x1</li>
+                <li class="list-group-item">Coca x1</li>
+            </ul>
+        </div>
+        <div class="col-sm-4 text-center">
+            <h2>
+                #1<br/>
+                <span class="badge badge-primary">En préparation</span><br/>
+                <em>18€</em>
+            </h2>
+        </div>
+    </div>
+</div>
 {% endblock %}
