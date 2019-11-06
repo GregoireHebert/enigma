@@ -43,7 +43,8 @@ class OrderDetailWebTest extends WebTestCase
 
         $this->assertContains(
             'Status mis à jour avec succès.',
-            $crawler->filter('div.alert')->text()
+            $crawler->filter('div.alert')->text(),
+            "fail sur $status"
         );
     }
 }
