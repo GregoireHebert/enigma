@@ -19,4 +19,10 @@ class OrderRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->flush($order);
     }
+
+    public function persistAndSave(?Order $order = null): void
+    {
+        $this->getEntityManager()->persist($order);
+        $this->save($order);
+    }
 }

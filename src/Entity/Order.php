@@ -112,6 +112,7 @@ class Order
         if (!$this->selections->contains($selection)) {
             $this->selections[] = $selection;
             $selection->setMyOrder($this);
+            $this->amount += $selection->getQuantity() * $selection->getProduct()->getPrice();
         }
 
         return $this;
@@ -125,6 +126,8 @@ class Order
             if ($selection->getMyOrder() === $this) {
                 $selection->setMyOrder(null);
             }
+
+            $this->amount -= $selection->getQuantity() * $selection->getProduct()->getPrice();
         }
 
         return $this;
