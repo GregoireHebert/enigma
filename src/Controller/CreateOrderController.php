@@ -18,11 +18,11 @@ class CreateOrderController
 {
     public function __invoke(Environment $twig, FormFactoryInterface $formFactory): Response
     {
-//        $order = new Order();
-//        $form = $formFactory->create(OrderType::class, $order);
+        $order = new Order();
+        $form = $formFactory->create(OrderType::class, $order);
 
-        $selection = new Selection();
-        $form = $formFactory->create(SelectionType::class, $selection);
+//        $selection = new Selection();
+//        $form = $formFactory->create(SelectionType::class, $selection);
 
         return new Response($twig->render('orders/orderCreate.html.twig', [
             'form' => $form->createView()
