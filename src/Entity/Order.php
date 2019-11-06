@@ -16,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Order
 {
+    public const STATUSES = ['En préparation', 'Prêt', 'Emporté'];
+
     /**
      * @var int
      * @ORM\Column(type="integer")
@@ -26,7 +28,7 @@ class Order
     /**
      * @var string
      * @ORM\Column
-     * @Assert\Choice({"En préparation", "Prêt", "Emporté"})
+     * @Assert\Choice(Order::STATUSES)
      * @Assert\NotBlank()
      */
     private $status;
@@ -52,7 +54,7 @@ class Order
     /**
      * @return int
      */
-    public function getNumber(): int
+    public function getNumber(): ?int
     {
         return $this->number;
     }
@@ -68,7 +70,7 @@ class Order
     /**
      * @return string
      */
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -84,7 +86,7 @@ class Order
     /**
      * @return int
      */
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
