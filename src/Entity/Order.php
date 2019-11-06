@@ -42,7 +42,7 @@ class Order
     private $amount;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Selection", mappedBy="myOrder", orphanRemoval=true, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="App\Entity\Selection", mappedBy="myOrder", orphanRemoval=true, fetch="EAGER", cascade={"persist"})
      */
     private $selections;
 
