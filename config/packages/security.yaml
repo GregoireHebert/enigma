@@ -1,0 +1,39 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: argon2i
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory:
+            memory:
+                users:
+                    admin:
+                        password: '$argon2i$v=19$m=65536,t=4,p=1$Z3R4VDJPVC92cHRiS3RpLw$xpByCifqEYkZOpoOcYGmqKf+QJP8MgmIjceNepRXM6o'
+                        roles: 'ROLE_ADMIN'
+                    user:
+                        password: '$argon2i$v=19$m=65536,t=4,p=1$WXNrMG5xZms2UDhvU3pLaQ$GJrV+28Eepq+d0Lchr7+XU3LPKaP/DNPxCY+eQ7LyyE'
+                        roles: 'ROLE_USER'
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+                csrf_token_generator: security.csrf.token_manager
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
