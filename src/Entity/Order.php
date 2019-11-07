@@ -46,9 +46,27 @@ class Order
      */
     private $selections;
 
+    /**
+     * @ORM\Column(options={"default"="anon."})
+     * @Assert\NotBlank()
+     * @Assert\Length(min=1)
+     * @Assert\Type("string")
+     */
+    private $name;
+
     public function __construct()
     {
         $this->selections = new ArrayCollection();
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     /**

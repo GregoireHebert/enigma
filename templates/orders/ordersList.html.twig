@@ -8,6 +8,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Nom</th>
                         <th scope="col">Montant</th>
                         <th scope="col">Status</th>
                         <th scope="col">Actions</th>
@@ -17,6 +18,7 @@
                 {% for order in orders %}
                     <tr>
                         <th scope="row">{{ order.number }}</th>
+                        <td>{{ order.name }}</td>
                         <td>{{ order.amount }}€</td>
                         <td>{{ order.status }}</td>
                         <td><a href="{{ path('orders_detail', {id: order.number}) }}" class="btn btn-primary">Voir</a></td>

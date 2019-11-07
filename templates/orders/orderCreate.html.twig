@@ -8,6 +8,7 @@
         <div class="row">
             {{ form_start(form) }}
             {{ form_widget(form.status) }}
+            {{ form_widget(form.name) }}
             {# store the prototype on the data-prototype attribute #}
             <ul id="selection-fields-list"
                 data-prototype="{{ form_widget(form.selections.vars.prototype)|e }}"

@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col-sm-8">
-            <h1>Votre commande</h1>
+            <h1>Votre commande {{ order.name }}</h1>
             <ul class="list-group">
             {% for selection in order.selections %}
                 <li class="list-group-item">{{ selection.product.name }} x{{ selection.quantity }}</li>
