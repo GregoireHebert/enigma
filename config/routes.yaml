@@ -19,3 +19,6 @@ orders_detail:
 order_update_status:
   path: /orders/{id}/status/{status}
   controller: App\Controller\OrderUpdateStatus
+
+logout:
+  path: /logout

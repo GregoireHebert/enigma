@@ -25,15 +25,23 @@ security:
                 login_path: login
                 check_path: login
                 csrf_token_generator: security.csrf.token_manager
-
+            logout:
+                path: /logout
+                target: /login
+                csrf_token_generator: security.csrf.token_manager
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: ['ROLE_ADMIN', 'ROLE_ALLOWED_TO_SWITCH']
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/orders/create, roles: ROLE_ADMIN }
+         - { path: ^/orders, roles: ROLE_USER }
+         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
