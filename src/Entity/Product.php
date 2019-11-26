@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -21,18 +22,24 @@ class Product
     /**
      * @var string
      * @ORM\Column
+     * @Assert\Length(min=2)
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
      */
     private $name;
     /**
      * @var int
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\GreaterThan(0)
+     * @Assert\Type(type="int")
      */
     private $price;
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -40,7 +47,7 @@ class Product
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -56,7 +63,7 @@ class Product
     /**
      * @return int
      */
-    public function getPrice(): int
+    public function getPrice(): ?int
     {
         return $this->price;
     }

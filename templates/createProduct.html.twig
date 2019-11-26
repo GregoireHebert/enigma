@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Product{% endblock %}
+
+{% block body %}
+
+    {{ render(controller('App\\Controller\\ListProducts')) }}
+
+    Mon Formulaire de création de produits.
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}
