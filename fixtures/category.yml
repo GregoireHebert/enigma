@@ -1,0 +1,9 @@
+App\Entity\Category:
+  starters:
+    name: Starters
+
+  burgers:
+    name: Burgers
+
+  drinks:
+    name: Drinks

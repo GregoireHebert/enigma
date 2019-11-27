@@ -1,0 +1,30 @@
+App\Entity\Product:
+  product_BigMac:
+    name: BigMac
+    price: 490
+    category: '@burgers'
+
+  product_CBO:
+    name: CBO
+    price: 490
+    category: '@burgers'
+
+  product_Coca:
+    name: Coca
+    price: 190
+    category: '@drinks'
+
+  product_Sprite:
+    name: Sprite
+    price: 190
+    category: '@drinks'
+
+  product_Frites:
+    name: Frites
+    price: 100
+    category: '@starters'
+
+  product_Nuggets:
+    name: Nuggets
+    price: 100
+    category: '@starters'

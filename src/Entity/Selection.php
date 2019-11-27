@@ -20,7 +20,7 @@ class Selection
     private $id;
     /**
      * @var Product
-     * @ORM\ManyToOne(targetEntity=Product::class)
+     * @ORM\ManyToOne(targetEntity=Product::class, cascade={"persist"})
      */
     private $product;
     /**
