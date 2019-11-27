@@ -22,7 +22,7 @@ class Cart
     private $id;
     /**
      * @var Selection[]|Collection
-     * @ORM\ManyToMany(targetEntity=Selection::class, cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=Selection::class, cascade={"persist"}, fetch="EAGER")
      * @ORM\JoinTable(
      *     joinColumns={@ORM\JoinColumn(name="cart_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="selection_id", referencedColumnName="id", unique=true)}

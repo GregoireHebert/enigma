@@ -38,7 +38,7 @@ class Product
 
     /**
      * @var Category
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products", cascade={"persist"}, fetch="EAGER")
      */
     private $category;
 
