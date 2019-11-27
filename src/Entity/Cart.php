@@ -33,7 +33,7 @@ class Cart
      * @var int
      * @ORM\Column(type="integer")
      */
-    private $total;
+    private $total = 0;
 
     public function __construct()
     {
@@ -68,12 +68,16 @@ class Cart
     {
         if (!$this->selections->contains($selection)) {
             $this->selections->add($selection);
+
+            $this->total += $selection->getProduct()->getPrice() * $selection->getQuantity();
         }
     }
 
     public function removeSelection(Selection $selection): void
     {
         if ($this->selections->contains($selection)) {
+            $this->total -= $selection->getProduct()->getPrice() * $selection->getQuantity();
+
             $this->selections->removeElement($selection);
         }
     }
