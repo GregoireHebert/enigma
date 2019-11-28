@@ -2,4 +2,3 @@ App\Entity\Cart:
   cart_{1..10}:
     selections (unique): '<numberbetween(1, 4)>x @selection_*'
     total: '<numberbetween(100, 3000)>'
-    orderStatus: '@preparation'
