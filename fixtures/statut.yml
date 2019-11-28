@@ -1,0 +1,9 @@
+App\Entity\Statut:
+  statut_Preparation:
+    name: En préparation
+
+  statut_Pret:
+  name: Prêt
+
+  statut_Emporte:
+    name: Emporté

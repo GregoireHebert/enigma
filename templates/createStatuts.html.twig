@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Statut{% endblock %}
+
+{% block body %}
+
+    {{ render(controller('App\\Controller\\ListStatuts')) }}
+
+    {% if is_granted('ROLE_MANAGER') or app.user.getUsername() == 'greg' %}
+        Mon Formulaire de création de statut.
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    {% endif %}
+
+{% endblock %}
