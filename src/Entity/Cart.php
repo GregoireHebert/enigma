@@ -13,6 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Cart
 {
+    public const ORDER_STATUS_IN_PROGRESS = 'commande en preparation';
+    public const ORDER_STATUS_READY = "commande prete";
+    public const ORDER_STATUS_TAKE = "commande emportee";
     /**
      * @var int
      * @ORM\Id()
@@ -34,6 +37,11 @@ class Cart
      * @ORM\Column(type="integer")
      */
     private $total = 0;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $status;
 
     public function __construct()
     {
@@ -96,5 +104,17 @@ class Cart
     public function setTotal(int $total): void
     {
         $this->total = $total;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }

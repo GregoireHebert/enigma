@@ -9,6 +9,7 @@
             <tr>
                 <th scope="col">Order {{ cart.id }}#</th>
                 <th scope="col">{{ cart.total/100 }}€</th>
+                <th scope="col"><span class="badge badge-primary">{{ cart.status }}</span></th>
             </tr>
         </thead>
         <tbody>
