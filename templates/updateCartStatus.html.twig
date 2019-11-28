@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update cart status{% endblock %}
+
+{% block body %}
+
+    <h1>Update cart status</h1>
+    <div>
+        <span>Order {{ cart.id }}#</span>
+        <span class="badge badge-primary">{{ cart.status.name }}</span>
+    </div>
+
+    <h2>Selection:</h2>
+    <table class="table">
+        {% for selection in cart.selections %}
+            <tr>
+                <th scope="row">
+                    <span class="badge badge-primary">{{ selection.product.category.name }}</span>
+                </th>
+                <td>
+                    {{ selection.product.name }} x{{ selection.quantity }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
