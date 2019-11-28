@@ -9,6 +9,8 @@
             <tr>
                 <th scope="col">Order {{ cart.id }}#</th>
                 <th scope="col">{{ cart.total/100 }}€</th>
+                <th scope="col">Status :  {{ cart.orderStatus.status }}</th>
+                <th scope="col"><a href="{{ path('updateOrderStatus', {'id': cart.id}) }}">Editer le status</a></th>
             </tr>
         </thead>
         <tbody>
