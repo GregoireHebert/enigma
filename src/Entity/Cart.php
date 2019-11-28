@@ -29,6 +29,12 @@ class Cart
      * )
      */
     private $selections;
+
+    /**
+     * @var Statut
+     * @ORM\ManyToOne(targetEntity=Statut::class, inversedBy="statuts", cascade={"persist"}, fetch="LAZY")
+     */
+    private $category;
     /**
      * @var int
      * @ORM\Column(type="integer")
