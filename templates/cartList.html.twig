@@ -14,12 +14,16 @@
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ cart.status }}
                         </a>
-
+                        {% if cart.status != orderStatusTake %}
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{{ path('cart_update', {'id': cart.id, 'status': orderStatusInProgress}) }}">{{ orderStatusInProgress }}</a>
-                            <a class="dropdown-item" href="{{ path('cart_update', {'id': cart.id, 'status': orderStatusReady}) }}"> {{ orderStatusReady }}</a>
-                            <a class="dropdown-item" href="{{ path('cart_update', {'id': cart.id, 'status': orderStatusTake}) }}"> {{ orderStatusTake }}</a>
+                            {% if cart.status == orderStatusInProgress %}
+                                <a class="dropdown-item" href="{{ path('cart_update', {'id': cart.id, 'status': orderStatusReady}) }}"> {{ orderStatusReady }}</a>
+                            {% endif %}
+                            {% if cart.status == orderStatusReady %}
+                                <a class="dropdown-item" href="{{ path('cart_update', {'id': cart.id, 'status': orderStatusTake}) }}"> {{ orderStatusTake }}</a>
+                            {% endif %}
                         </div>
+                        {% endif %}
                     </div>
                 </th>
             </tr>
