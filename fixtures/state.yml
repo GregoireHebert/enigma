@@ -1,0 +1,9 @@
+App\Entity\State:
+  state_in_preparation:
+    label: 'in_preparation'
+
+  state_ready:
+    label: 'ready'
+
+  state_taken:
+    label: 'taken'

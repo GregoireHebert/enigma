@@ -35,6 +35,11 @@ class Cart
      */
     private $total = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\State", inversedBy="carts")
+     */
+    private $state;
+
     public function __construct()
     {
         $this->selections = new ArrayCollection();
@@ -96,5 +101,17 @@ class Cart
     public function setTotal(int $total): void
     {
         $this->total = $total;
+    }
+
+    public function getState(): ?State
+    {
+        return $this->state;
+    }
+
+    public function setState(?State $state): self
+    {
+        $this->state = $state;
+
+        return $this;
     }
 }
