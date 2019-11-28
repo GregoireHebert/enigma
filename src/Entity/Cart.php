@@ -35,6 +35,8 @@ class Cart
      */
     private $total = 0;
 
+
+
     public function __construct()
     {
         $this->selections = new ArrayCollection();
@@ -97,4 +99,5 @@ class Cart
     {
         $this->total = $total;
     }
+
 }

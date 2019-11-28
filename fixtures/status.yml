@@ -1,0 +1,7 @@
+App\Entity\Status:
+  inProgress:
+    name: InProgress
+  ready:
+    name: Ready
+  take:
+    name: Take
