@@ -37,7 +37,7 @@ class Cart
 
     /**
      * @var State
-     * @ORM\ManyToOne(targetEntity="App\Entity\State", inversedBy="carts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\State")
      */
     private $state;
 

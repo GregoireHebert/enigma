@@ -27,12 +27,6 @@ class UpdateCartStateController extends AbstractController
     {
         $this->cartStateUpdateService->updateStateForward($cart);
 
-        $this->addFlash('success', sprintf(
-            'State of cart number %d updated to %s',
-            $cart->getId(),
-            $cart->getState()->getLabel()
-        ));
-
         return $this->redirect(
             $this->generateUrl('carts')
         );
