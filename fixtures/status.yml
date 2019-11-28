@@ -1,0 +1,7 @@
+App\Entity\Status:
+  status_preparation:
+    name: 'En préparation'
+  status_pret:
+    name: 'Prêt'
+  status_emporte:
+    name: 'Emportée'

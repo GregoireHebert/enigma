@@ -7,4 +7,4 @@ App\Entity\Customer:
   user_other_jordan:
     username: jordan
     roles: ['ROLE_JORDAN']
-    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$mxLbdHDDk+5pQvEVA11psQ\$X1XR+r0aZ0u4/amAfkHLPUShHYTiN/HXO66n6PkZrOE'
+    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$iiK7CnBLTTYVD26ER/yuNg\$4aG1eu/ax/cbUpIk/V5+IY6vxw3JDJgUjvKoOpUIjZw'
