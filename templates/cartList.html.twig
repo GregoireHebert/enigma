@@ -7,7 +7,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Order {{ cart.id }}#</th>
+                <th scope="col">
+                    <span>Order {{ cart.id }}#</span>
+                    <span class="badge badge-primary">{{ cart.status.name }}</span>
+                </th>
                 <th scope="col">{{ cart.total/100 }}€</th>
             </tr>
         </thead>

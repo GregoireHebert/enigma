@@ -1,0 +1,13 @@
+App\Entity\CartStatus:
+
+  status_prepare:
+    level: 0
+    name: 'En préparation'
+
+  status_ready:
+    level: 1
+    name: 'Prêt'
+
+  status_send:
+    level: 2
+    name: 'Emporté'

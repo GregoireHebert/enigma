@@ -20,6 +20,7 @@ class Cart
      * @ORM\GeneratedValue()
      */
     private $id;
+
     /**
      * @var Selection[]|Collection
      * @ORM\ManyToMany(targetEntity=Selection::class, cascade={"persist"}, fetch="EAGER")
@@ -29,11 +30,18 @@ class Cart
      * )
      */
     private $selections;
+
     /**
      * @var int
      * @ORM\Column(type="integer")
      */
     private $total = 0;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\CartStatus")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
 
     public function __construct()
     {
@@ -96,5 +104,17 @@ class Cart
     public function setTotal(int $total): void
     {
         $this->total = $total;
+    }
+
+    public function getStatus(): ?CartStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?CartStatus $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }
