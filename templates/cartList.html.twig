@@ -9,7 +9,19 @@
             <tr>
                 <th scope="col">Order {{ cart.id }}#</th>
                 <th scope="col">{{ cart.total/100 }}€</th>
-                <th scope="col"><span class="badge badge-primary">{{ cart.status }}</span></th>
+                <th scope="col">
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ cart.status }}
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path('cart_update', {'id': cart.id, 'status': orderStatusInProgress}) }}">{{ orderStatusInProgress }}</a>
+                            <a class="dropdown-item" href="{{ path('cart_update', {'id': cart.id, 'status': orderStatusReady}) }}"> {{ orderStatusReady }}</a>
+                            <a class="dropdown-item" href="{{ path('cart_update', {'id': cart.id, 'status': orderStatusTake}) }}"> {{ orderStatusTake }}</a>
+                        </div>
+                    </div>
+                </th>
             </tr>
         </thead>
         <tbody>

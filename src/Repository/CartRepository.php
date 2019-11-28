@@ -22,4 +22,18 @@ class CartRepository extends ServiceEntityRepository
     {
         return parent::findAll();
     }
+
+    public function updateCart(int $id, string $status)
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+
+        return $queryBuilder
+            ->update()
+            ->set('c.status', '?1')
+            ->where('c.id = :id')
+            ->setParameter('id', $id)
+            ->setParameter(1, $status)
+
+            ->getQuery()->execute();
+    }
 }
