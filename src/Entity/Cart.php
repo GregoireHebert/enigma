@@ -34,6 +34,27 @@ class Cart
      * @ORM\Column(type="integer")
      */
     private $total = 0;
+    /**
+     * @var CartStatus
+     * @ORM\ManyToOne(targetEntity=CartStatus::class, inversedBy="carts", cascade={"persist"}, fetch="LAZY")
+     */
+    private $cartStatus;
+
+    /**
+     * @return CartStatus
+     */
+    public function getCartStatus(): CartStatus
+    {
+        return $this->cartStatus;
+    }
+
+    /**
+     * @param CartStatus $cartStatus
+     */
+    public function setCartStatus(CartStatus $cartStatus): void
+    {
+        $this->cartStatus = $cartStatus;
+    }
 
     public function __construct()
     {

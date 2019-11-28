@@ -25,6 +25,12 @@ class CartStatus
     /**
      * @return int
      */
+
+    /**
+     * @var string
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="cartStatus")
+     */
+    private $cart;
     public function getId(): int
     {
         return $this->id;
