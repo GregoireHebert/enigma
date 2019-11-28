@@ -1,4 +1,4 @@
 App\Entity\Selection:
-  selection_{1..400}:
+  selection_{1..100}:
     quantity: '<numberBetween(1,5)>'
     product: '@product_*'

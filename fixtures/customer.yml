@@ -1,10 +1,10 @@
 App\Entity\Customer:
-  user_admin_greg:
-    username: greg
+  user_admin_max:
+    username: Max
     roles: ['ROLE_ADMIN']
-    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$rdZgBATMwV5DQ1a+vLnvGQ\$rRLAfE/QjdFQyqCbZOfa+1J6opzLZrsHdl4icNKLFc0'
+    password: '\$argon2i\$v=19\$m=65536,t=4,p=1\$MHRCOVluOFQ3N2liZjN1NQ\$+s4uMYVEApsx3SwP3yFGxSW4+UVYDq5qWnHetGcql1k'
 
-  user_other_jordan:
-    username: jordan
-    roles: ['ROLE_JORDAN']
-    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$mxLbdHDDk+5pQvEVA11psQ\$X1XR+r0aZ0u4/amAfkHLPUShHYTiN/HXO66n6PkZrOE'
+  user_admin_henry:
+    username: Henry
+    roles: ['ROLE_HENRY']
+    password: '\$argon2i\$v=19\$m=65536,t=4,p=1\$MHRCOVluOFQ3N2liZjN1NQ\$+s4uMYVEApsx3SwP3yFGxSW4+UVYDq5qWnHetGcql1k'
