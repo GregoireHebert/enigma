@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\CreateProductType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ use Twig\Environment;
 
 /**
  * @Route(path="/products", methods={"POST", "GET"}, name="products_create")
+ * @Security("is_granted('ROLE_MANAGER')")
  */
 class CreateProduct
 {

@@ -4,11 +4,16 @@
 
 {% block body %}
 
+{#    {{ dump(app.session) }}#}
+
     {{ render(controller('App\\Controller\\ListProducts')) }}
 
+    {% if is_granted('ROLE_MANAGER') or app.user.getUsername() == 'greg' %}
     Mon Formulaire de création de produits.
+
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+    {% endif %}
 
 {% endblock %}
