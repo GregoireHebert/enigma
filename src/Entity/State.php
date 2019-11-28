@@ -11,6 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class State
 {
+    public const STATE_IN_PREPARATION = 'in_preparation';
+    public const STATE_READY = 'ready';
+    public const STATE_TAKEN = 'taken';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -36,6 +36,7 @@ class Cart
     private $total = 0;
 
     /**
+     * @var State
      * @ORM\ManyToOne(targetEntity="App\Entity\State", inversedBy="carts")
      */
     private $state;
@@ -113,5 +114,14 @@ class Cart
         $this->state = $state;
 
         return $this;
+    }
+
+    public function getNextState(): string
+    {
+        if ($this->state->getLabel() === State::STATE_IN_PREPARATION) {
+            return State::STATE_READY;
+        }
+
+        return State::STATE_TAKEN;
     }
 }

@@ -9,6 +9,14 @@
             <tr>
                 <th scope="col">Order {{ cart.id }}#</th>
                 <th scope="col">{{ cart.total/100 }}€</th>
+                <th>
+                    <span class="badge badge-primary">
+                        {{ cart.state.label }}
+                    </span>
+                    <a href="{{ path('update_state', {'id': cart.id}) }}" class="btn btn-primary">
+                        Update to {{ cart.nextState }}
+                    </a>
+                </th>
             </tr>
         </thead>
         <tbody>
