@@ -14,4 +14,12 @@ class CartRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Cart::class);
     }
+
+    /**
+     * @return Cart[]|array
+     */
+    public function findAll(): array
+    {
+        return parent::findAll();
+    }
 }
