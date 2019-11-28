@@ -2,7 +2,30 @@
 
 {% block title %}Mes commandes{% endblock %}
 
+{% block stylesheets %}
+<style>
+    .badge a {
+        color: white;
+    }
+
+    .badge a:hover {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
+    {% if filterLabel %}
+        <h1>
+            Filtered by {{ filterLabel }}
+        </h1>
+
+        <a href="{{ path('carts') }}" class="btn btn-primary">
+            Retour à la liste non filtrée
+        </a>
+    {% endif %}
+
     {% for cart in carts %}
     <table class="table">
         <thead>
@@ -11,7 +34,9 @@
                 <th scope="col">{{ cart.total/100 }}€</th>
                 <th>
                     <span class="badge badge-primary">
-                        {{ cart.state.label }}
+                        <a href="{{ path('carts', { 'state': cart.state.label }) }}">
+                            {{ cart.state.label }}
+                        </a>
                     </span>
                     {% if is_granted('ROLE_MANAGER') %}
                         <a href="{{ path('update_state', {'id': cart.id}) }}" class="btn btn-primary">

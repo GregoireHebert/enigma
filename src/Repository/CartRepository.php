@@ -22,4 +22,15 @@ class CartRepository extends ServiceEntityRepository
     {
         return parent::findAll();
     }
+
+    public function findByState(string $stateLabel) {
+        return $this
+            ->createQueryBuilder('c')
+            ->join('c.state', 's')
+            ->where('s.label = :label')
+            ->setParameter('label', $stateLabel)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
