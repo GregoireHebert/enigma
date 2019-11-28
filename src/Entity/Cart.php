@@ -43,7 +43,7 @@ class Cart
     /**
      * @return CartStatus
      */
-    public function getCartStatus(): CartStatus
+    public function getCartStatus(): ?CartStatus
     {
         return $this->cartStatus;
     }

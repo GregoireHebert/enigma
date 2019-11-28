@@ -16,8 +16,10 @@ class ListCartsController
 {
     public function __invoke(Environment $twig, CartRepository $cartRepository)
     {
+        $allCarts = $cartRepository->findAll();
+
         return new Response($twig->render('cartList.html.twig', [
-            'carts' => $cartRepository->findAll()
+            'carts' => $allCarts
         ]));
     }
 }
