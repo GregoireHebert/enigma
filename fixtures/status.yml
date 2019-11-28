@@ -1,0 +1,4 @@
+App\Entity\Status:
+  doing:
+    level: 0
+    label: 'En préparation'
