@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Form\CreateCartType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,6 +19,7 @@ use Twig\Environment;
 
 /**
  * @Route(path="carts/{id}/update", methods={"GET","POST"}, name="carts_update")
+ * @Security("is_granted('ROLE_MANAGER')")
  */
 class UpdateCartController extends AbstractController
 {
