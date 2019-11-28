@@ -7,12 +7,19 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
  */
 class Cart
 {
+    public const STATUSES = [
+        'En préparation',
+        'Prêt',
+        'Emporté'
+    ];
+
     /**
      * @var int
      * @ORM\Id()
@@ -34,6 +41,12 @@ class Cart
      * @ORM\Column(type="integer")
      */
     private $total = 0;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default": "En préparation"})
+     * @Assert\NotBlank
+     */
+    private $status;
 
     public function __construct()
     {
@@ -96,5 +109,17 @@ class Cart
     public function setTotal(int $total): void
     {
         $this->total = $total;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }
