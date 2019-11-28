@@ -13,9 +13,11 @@
                     <span class="badge badge-primary">
                         {{ cart.state.label }}
                     </span>
-                    <a href="{{ path('update_state', {'id': cart.id}) }}" class="btn btn-primary">
-                        Update to {{ cart.nextState }}
-                    </a>
+                    {% if is_granted('ROLE_MANAGER') %}
+                        <a href="{{ path('update_state', {'id': cart.id}) }}" class="btn btn-primary">
+                            Update to {{ cart.nextState }}
+                        </a>
+                    {% endif %}
                 </th>
             </tr>
         </thead>
