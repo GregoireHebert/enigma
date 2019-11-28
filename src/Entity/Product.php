@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\ProductRepository;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product
 {
@@ -38,9 +41,19 @@ class Product
 
     /**
      * @var Category
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products", cascade={"persist"}, fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products", cascade={"persist"}, fetch="LAZY")
      */
     private $category;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Customer", inversedBy="products", cascade={"persist", "refresh", "merge"})
+     */
+    private $responsible;
+
+    public function __construct()
+    {
+        $this->responsible = new ArrayCollection();
+    }
 
     /**
      * @return Category
@@ -96,5 +109,31 @@ class Product
     public function setPrice(int $price): void
     {
         $this->price = $price;
+    }
+
+    /**
+     * @return Collection|Customer[]
+     */
+    public function getResponsible(): Collection
+    {
+        return $this->responsible;
+    }
+
+    public function addResponsible(Customer $responsible): self
+    {
+        if (!$this->responsible->contains($responsible)) {
+            $this->responsible[] = $responsible;
+        }
+
+        return $this;
+    }
+
+    public function removeResponsible(Customer $responsible): self
+    {
+        if ($this->responsible->contains($responsible)) {
+            $this->responsible->removeElement($responsible);
+        }
+
+        return $this;
     }
 }
