@@ -24,7 +24,6 @@ class ListCartsController
 
         return new Response($twig->render('cartList.html.twig', [
             'carts' => $cartRepository->findAll()
-            //'status' => $statusRepository->findId()
         ]));
     }
 }

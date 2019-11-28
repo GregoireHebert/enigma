@@ -1,0 +1,15 @@
+
+
+{% block title %}Update Cart{% endblock %}
+
+{% block body %}
+    Mon Formulaire de modification de Status de commande.<br>
+    {% for stat in status %}
+        <a href="{{ path('cart_update', {'id': stat.id}) }}">{{ stat.name }}</a><br>
+    {% endfor %}
+
+{#    {{ form_start(form) }}#}
+{#    {{ form_widget(form) }}#}
+{#    {{ form_end(form) }}#}
+
+{% endblock %}

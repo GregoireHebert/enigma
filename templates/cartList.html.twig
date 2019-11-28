@@ -10,6 +10,7 @@
                 <th scope="col">Order {{ cart.id }}#</th>
                 <th scope="col">{{ cart.total/100 }}€</th>
                 <th scope="col">{{ cart.status.name }}</th>
+                <th><a href="{{ path('cart_update', {'id': cart.id}) }}">Modifier le status</a></th>
             </tr>
         </thead>
         <tbody>
