@@ -1,0 +1,12 @@
+App\Entity\Status:
+  preparing:
+    name: preparing
+    value: 1
+
+  ready:
+    name: ready
+    value: 2
+
+  carried:
+    name: carried
+    value: 3

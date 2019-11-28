@@ -15,6 +15,9 @@ class CartRepository extends ServiceEntityRepository
         parent::__construct($registry, Cart::class);
     }
 
+    public function create(){
+        // cart.status = _em. get status "prepa"
+    }
     /**
      * @return Cart[]|array
      */
