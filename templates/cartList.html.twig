@@ -12,7 +12,11 @@
                     <span class="badge badge-primary">{{ cart.status.name }}</span>
                 </th>
                 <th scope="col">{{ cart.total/100 }}€</th>
-                <th scope="col"><a href="{{ path('cart_status_update', {'id': cart.id}) }}">Edit</a></th>
+                <th scope="col">
+                    {% if is_granted('ROLE_MANAGER') %}
+                    <a href="{{ path('cart_status_update', {'id': cart.id}) }}">Edit</a>
+                    {% endif %}
+                </th>
             </tr>
         </thead>
         <tbody>

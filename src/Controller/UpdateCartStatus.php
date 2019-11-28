@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Form\CreateCartType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -22,24 +23,28 @@ use Twig\Environment;
  * @package App\Controller
  *
  * @Route(path="carts/{id}/update_status", methods={"GET", "POST"}, name="cart_status_update")
+ * @Security("is_granted('ROLE_MANAGER')")
  */
 class UpdateCartStatus extends AbstractController
 {
     public function __invoke(RouterInterface $router, Request $request, Environment $twig, FormFactoryInterface $formFactory, EntityManagerInterface $entityManager, Cart $cart)
     {
         $form = $formFactory->create(CreateCartType::class, $cart);
-        $oldCartStatus = $cart->getStatus()->getLevel();
+
+        $oldCartStatus = $cart->getStatus();
+        $oldCartLevel = $oldCartStatus->getLevel();
+        $currentStatus = $oldCartStatus->getName();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newCartLevel = $cart->getStatus()->getLevel();
-            if ($newCartLevel >= $oldCartStatus && $newCartLevel - $oldCartStatus <= 1) {
+            if ($newCartLevel >= $oldCartLevel && abs($oldCartLevel - $newCartLevel) <= 1) {
                 $entityManager->flush();
                 return new RedirectResponse($router->generate('carts'));
             }
             else {
-                $form->get('status')->addError(new FormError('Incorrect flow'));
+                $form->get('status')->addError(new FormError('Incorrect workflow'));
             }
 
         }
@@ -48,6 +53,7 @@ class UpdateCartStatus extends AbstractController
             $twig->render(
                 'updateCartStatus.html.twig',
                 [
+                    'status' => $currentStatus,
                     'cart' => $cart,
                     'form' => $form->createView()
                 ]

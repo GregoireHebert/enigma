@@ -7,7 +7,7 @@
     <h1>Update cart status</h1>
     <div>
         <span>Order {{ cart.id }}#</span>
-        <span class="badge badge-primary">{{ cart.status.name }}</span>
+        <span class="badge badge-primary">{{ status }}</span>
     </div>
 
     <h2>Selection:</h2>
@@ -24,8 +24,10 @@
         {% endfor %}
     </table>
 
+    {% if is_granted('ROLE_MANAGER') %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+    {% endif %}
 
 {% endblock %}

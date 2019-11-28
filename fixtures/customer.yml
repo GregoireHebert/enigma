@@ -4,7 +4,12 @@ App\Entity\Customer:
     roles: ['ROLE_ADMIN']
     password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$rdZgBATMwV5DQ1a+vLnvGQ\$rRLAfE/QjdFQyqCbZOfa+1J6opzLZrsHdl4icNKLFc0'
 
-  user_other_jordan:
+  user_jordan:
     username: jordan
+    roles: ['ROLE_MANAGER']
+    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$TbC5eYtzMu1OaUgEVl2RKA\$tjYl2GKiEDhhJJ0EpWd5+5KveOPiZcIGnzvKA3h4GxQ'
+
+  user_other_jordan:
+    username: jordan2
     roles: ['ROLE_JORDAN']
-    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$mxLbdHDDk+5pQvEVA11psQ\$X1XR+r0aZ0u4/amAfkHLPUShHYTiN/HXO66n6PkZrOE'
+    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$TbC5eYtzMu1OaUgEVl2RKA\$tjYl2GKiEDhhJJ0EpWd5+5KveOPiZcIGnzvKA3h4GxQ'
