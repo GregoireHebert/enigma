@@ -1,4 +1,5 @@
 App\Entity\Cart:
   cart_{1..100}:
+    status: <randomElement(['En préparation', 'Prête', 'Emportée'])>
     selections (unique): '<numberbetween(1, 4)>x @selection_*'
     total: '<numberbetween(100, 3000)>'

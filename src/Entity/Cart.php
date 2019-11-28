@@ -7,12 +7,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CartRepository;
 
 /**
  * @ORM\Entity()
  */
 class Cart
 {
+
+  public const STATUSES = ['En préparation', 'Prête', 'Emportée'];
     /**
      * @var int
      * @ORM\Id()
@@ -63,6 +66,22 @@ class Cart
     {
         $this->selections = $selections;
     }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): ?string
+    {
+      return $this->status;
+    }
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+      $this->status = $status;
+    }
+
 
     public function addSelection(Selection $selection): void
     {

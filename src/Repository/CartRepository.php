@@ -22,4 +22,15 @@ class CartRepository extends ServiceEntityRepository
     {
         return parent::findAll();
     }
+
+    public function save(?Cart $cart = null): void
+    {
+      $this->getEntityManager()->flush($cart);
+    }
+
+    public function persistAndSave(?Cart $cart = null): void
+    {
+      $this->getEntityManager()->persist($cart);
+      $this->save($cart);
+    }
 }
