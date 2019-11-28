@@ -18,8 +18,9 @@ class UpdateCart
      */
     public function __invoke(RouterInterface $router, Request $request)
     {
+
         //data = $request->request->get('form');
         //return new RedirectResponse($router->generate('carts'));
-        return new Response(json_encode($request));
+        return new Response($request->query->get('id_status'));
     }
 }

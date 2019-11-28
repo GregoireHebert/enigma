@@ -11,16 +11,19 @@
                 <th scope="col">{{ cart.total/100 }}€</th>
                 <th>
                     <div class="input-group">
+                        {% if is_granted('ROLE_MANAGER') %}
                         <form method="post" action="/{{ app.request.get('_route') }}/{{ cart.id }}/update">
-                        <select class="custom-select" name="status" id="{{ cart.id }}">
-                            {% for status in statuses %}
-                            <option {% if cart.status == status %}selected{% endif %}>{{ status }}</option>
-                            {% endfor %}
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit">Modifier</button>
-                        </div>
+                            <input type="hidden" name="id_status" value="{{ cart.id }}"/>
+                            <select class="custom-select" name="status" id="{{ cart.id }}">
+                                {% for status in statuses %}
+                                <option {% if cart.status == status %}selected{% endif %}>{{ status }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit">Modifier</button>
+                            </div>
                         </form>
+                        {% endif %}
                     </div>
                 </th>
             </tr>
