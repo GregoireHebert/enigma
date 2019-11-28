@@ -1,0 +1,5 @@
+App\Entity\Customer:
+  user_admin_greg:
+    username: greg
+    roles: ['ROLE_ADMIN']
+    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$rdZgBATMwV5DQ1a+vLnvGQ\$rRLAfE/QjdFQyqCbZOfa+1J6opzLZrsHdl4icNKLFc0'
