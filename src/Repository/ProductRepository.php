@@ -15,14 +15,14 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function getDrinks()
+    public function getByCategoryName(string $categoryName)
     {
         $queryBuilder = $this->createQueryBuilder('p');
 
         return $queryBuilder
             ->join('p.category', 'c')
             ->where('c.name = :categoryName')
-            ->setParameter('categoryName', 'Drinks')
+            ->setParameter('categoryName', $categoryName)
             ->getQuery()
             ->getResult();
     }
