@@ -9,6 +9,7 @@
             <tr>
                 <th scope="col">Order {{ cart.id }}#</th>
                 <th scope="col">{{ cart.total/100 }}€</th>
+                <th scope ="col"> {{ cart.status }}</th>
             </tr>
         </thead>
         <tbody>
@@ -23,12 +24,13 @@
                             <td>
                                 {{ selection.product.name }} x{{ selection.quantity }}
                             </td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    {% endfor %}
+{#  <td> {{ cart.status }}</td> #}
+</tr>
+{% endfor %}
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+{% endfor %}
 {% endblock %}

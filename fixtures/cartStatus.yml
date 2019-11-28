@@ -1,0 +1,9 @@
+App\Entity\CartStatus:
+  status_enPreparation:
+    statusDescription: En Preparation
+
+  status_pret:
+    statusDescription: Pret
+
+  status_emporte:
+    statusDescription: Emporté
