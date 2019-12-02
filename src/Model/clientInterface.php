@@ -6,12 +6,16 @@ namespace App\Model;
 
 interface clientInterface {
 
-    function setId(): int;
+    function setId(int $id): int;
     function getId(): int;
-    function setNom(): string;
+    function setNom(string $nom): string;
     function getNom(): string;
-    function setAdresse(): string;
+    function setAdresse(string $adresse): string;
     function getAdresse(): string;
-    function setPoints(): int;
-    function getPoints(): int;
+    function setPoint(int $point): int;
+    function getPoint(): int;
+    function addPoint(): int;
+    function setOrder(Categories $interfaceCommande);
+    function getOrder(): Array;
+    function addOrder(): Array;
 }
