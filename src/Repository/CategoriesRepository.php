@@ -43,13 +43,10 @@ SQL
         ]);
      }
 
-
-    public function getAll (Categories $categories){
+    public function getAll (){
         $preparation = $this->pdo->prepare('SELECT * FROM categories');
-        $preparation->execute([
-            'id'=>$categories->getId(),
-            ':name'=>$categories->getName()
-        ]);
+        $preparation->execute();
+        return $preparation->fetchAll(\PDO::FETCH_CLASS, Categories::class);
     }
 
     public function getOne ($id): Categories{
@@ -57,6 +54,5 @@ SQL
         $preparation->execute(['id'=>$id]);
         return $preparation->fetchObject(Categories::class);
     }
-
 }
 
