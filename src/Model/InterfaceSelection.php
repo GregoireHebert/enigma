@@ -5,8 +5,8 @@ interface interfaceSelection{
 
     public function getQuantite():int;
     public function setQuantite(int $quantite);
-    public function AjoutQuantite(int $quantite);
-    public function ReduireQuantite(int $quantite);
+    public function ajoutQuantite(int $quantite);
+    public function reduireQuantite(int $quantite);
 
 }
 ?>
