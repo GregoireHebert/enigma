@@ -16,57 +16,33 @@
         {
             return $this->price;
         }
-
-        /**
-         * @param int $price
-         * @return int
-         */
         public function setPrice(int $price): int
         {
             $this->price = $price;
         }
-
-        /**
-         * @return int
-         */
         public function getId() :int
         {
             return $this->id;
         }
 
-        /**
-         * @param int $id
-         */
+
         public function setId(int $id): void
         {
             $this->id = $id;
         }
-        /**
-         * @return int
-         */
         public function getName() :string
         {
             return $this->name;
         }
-
-        /**
-         * @param string $name
-         * @return string
-         */
         public function setName( string $name): string
         {
             $this->name = $name;
         }
-        /**
-         * @return string
-         */
         public function getCategories() :array
         {
             return $this->categories;
         }
-        /**
-         * @param array $categories
-         */
+
         public function setCategories(array $categories): void
         {
             $this->categories = $categories;
