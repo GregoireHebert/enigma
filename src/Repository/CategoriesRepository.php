@@ -10,7 +10,7 @@ class CategoriesRepository
      private $pdo;
      public function __construct()
      {
-         $this->pdo= new \PDO('sqlite:'.__DIR__.'/../Var/database.sqlite');
+         $this->pdo= new \PDO('sqlite:'.__DIR__.'/../var/database.sqlite');
          $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
          $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
