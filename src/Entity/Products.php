@@ -9,7 +9,7 @@
         private $price;
         private $id;
         private $name;
-        private array $categories;
+        private $categories;
 
 
         public function getPrice():int
