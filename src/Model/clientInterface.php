@@ -12,10 +12,14 @@ interface clientInterface {
     function getNom(): string;
     function setAdresse(string $adresse): string;
     function getAdresse(): string;
-    function setPoint(int $point): int;
-    function getPoint(): int;
-    function addPoint(): int;
-    function setOrder(Categories $interfaceCommande);
+
+    //Les points de fidélité ne sont pas définis au niveau des produits.
+    /*function setPointFidelite(int $point): int;
+    function getPointFidelite(): int;
+    function addPointFidelite(): int;
+    function removePointFidelite(): int;*/
+
+    function setOrders(array $orders);
     function getOrder(): Array;
-    function addOrder(): Array;
+    function addOrder(InterfaceCommande $order): Array;
 }
