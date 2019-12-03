@@ -52,11 +52,10 @@ SQL
         ]);
     }
 
-    public function getOne (Categories $categories){
+    public function getOne ($id): Categories{
         $preparation = $this->pdo->prepare('SELECT * FROM categories where id=:id');
-        $preparation->execute([
-            'id'=>$categories->getId()
-        ]);
+        $preparation->execute(['id'=>$id]);
+        return $preparation->fetchObject(Categories::class);
     }
 
 }
