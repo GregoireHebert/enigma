@@ -42,4 +42,12 @@ class Selection implements interfaceSelection{
     {
         $this->quantite -= $quantite;
     }
+    public function __get($name)
+    {
+        if($name === 'id') {return $this->id;}
+    }
+    public function __isset($name)
+    {
+        return $name === 'id';
+    }
 }
