@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 
@@ -7,15 +9,15 @@ use App\Model\clientInterface;
 use App\Model\InterfaceCommande;
 
 class Client implements clientInterface {
-    private $Id;
-    private $Nom;
-    private $Adresse;
-    private $Orders;
+    private $id;
+    private $nom;
+    private $adresse;
+    private $orders;
 
 
     function setId(int $id): int
     {
-        $this->Id = $id;
+        $this->id = $id;
 
     }
 
@@ -26,40 +28,40 @@ class Client implements clientInterface {
 
     function setNom(string $nom): string
     {
-        $this->Nom = $nom;
+        $this->nom = $nom;
 
     }
 
     function getNom(): string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
     function setAdresse(string $adresse): string
     {
-        $this->Adresse = $adresse;
+        $this->adresse = $adresse;
     }
 
     function getAdresse(): string
     {
-        return $this->Adresse;
+        return $this->adresse;
     }
 
     function setOrders(array $orders)
     {
-        $this->Orders = $orders;
+        $this->orders = $orders;
     }
 
     function getOrders(): array
     {
-        return $this->Orders;
+        return $this->orders;
     }
 
     function addOrder(InterfaceCommande $order): array
     {
 
-        array_push($this->Orders,$order);
-        return $this->Orders;
+        array_push($this->orders,$order);
+        return $this->orders;
 
     }
 
