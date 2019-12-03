@@ -6,10 +6,10 @@
 
     class Products
     {
-        private int $price;
-        private int $id;
-        private  string $name;
-        private  $categories;
+        private $price;
+        private $id;
+        private $name;
+        private array $categories;
 
 
         public function getPrice():int
