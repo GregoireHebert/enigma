@@ -52,4 +52,19 @@ class Commandes implements InterfaceCommande {
     {
         unset($this->selections[array_search($selection, $this->selections)]);
     }
+public function __get($name){
+if ($name === 'id'){
+return$this->id;
+}
+
+}
+public function __isset($name){
+return$name === 'id';
+
+    }
+
+
+
+
+
 }
