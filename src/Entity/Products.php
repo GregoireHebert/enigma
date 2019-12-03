@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Entity;
+    namespace App\Entity;
+
+    use App\Model;
 
     class Products
     {
+        private int $price;
+        private int $id;
+        private  string $name;
+        private  $categories;
 
 
-        private  $price;
-        private $id;
-        private $name;
-        private $categories;
-
-        /**
-         * @return mixed
-         */
         public function getPrice():int
         {
             return $this->price;
         }
 
         /**
-         * @param mixed $price
+         * @param int $price
+         * @return int
          */
         public function setPrice(int $price): int
         {
@@ -28,7 +27,7 @@ namespace App\Entity;
         }
 
         /**
-         * @return mixed
+         * @return int
          */
         public function getId() :int
         {
@@ -36,15 +35,14 @@ namespace App\Entity;
         }
 
         /**
-         * @param mixed $id
+         * @param int $id
          */
         public function setId(int $id): void
         {
             $this->id = $id;
         }
-
         /**
-         * @return mixed
+         * @return int
          */
         public function getName() :string
         {
@@ -52,41 +50,36 @@ namespace App\Entity;
         }
 
         /**
-         * @param mixed $name
+         * @param string $name
+         * @return string
          */
         public function setName( string $name): string
         {
             $this->name = $name;
         }
-
         /**
-         * @return mixed
+         * @return string
          */
         public function getCategories() :array
         {
             return $this->categories;
         }
-
         /**
-         * @param mixed $categories
+         * @param array $categories
          */
         public function setCategories(array $categories): void
         {
             $this->categories = $categories;
         }
-
         public function addCategory( Categories $categorie) :void {
+            array_push( $this->categories , $categorie  );
+
 
         }
-
         public function removeCategory(Categories $categorie    ) :void{
+            $val = array_search($categorie, $this->categories );
+            unset($this->categories[$val]);
+
 
         }
-
-
-
-
-
-
-
     }
