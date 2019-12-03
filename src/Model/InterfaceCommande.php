@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Model;
+
 interface InterfaceCommande{
 
     public function getSelections():array;
@@ -8,7 +11,7 @@ interface InterfaceCommande{
     public function setClient(ClientInterface $client);
     
     public function addSelection(InterfaceSelection $selection);
-    public function updateSelection(InterfaceSelction $selection);
+    public function updateSelection(InterfaceSelection $selection);
     public function removeSelection(InterfaceSelection $selection);
 }
 ?>
