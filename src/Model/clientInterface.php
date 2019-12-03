@@ -20,6 +20,6 @@ interface clientInterface {
     function removePointFidelite(): int;*/
 
     function setOrders(array $orders);
-    function getOrder(): Array;
+    function getOrders(): Array;
     function addOrder(InterfaceCommande $order): Array;
 }
