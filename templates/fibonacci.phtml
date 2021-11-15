@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon super site</title>
+</head>
+<body>
+    <h1>Afficher la suite de fibonacci</h1>
+    <p><a href="<?php echo $routing->getPath('home'); ?>"><< retour</a></p>
+
+<?php if ($error) { ?>
+    <span style="background-color: coral;font-weight: bold">Saisie invalide.</span>
+<?php } ?>
+
+    <form method="post">
+        <label for="nombre">Nombre :</label>
+        <input type="text" id="nombre" name="nombre"/>
+        <input type="submit" name="submit" value="afficher"/>
+    </form>
+    <span style="background-color: bisque;"><?php echo implode(', ', $suite);?></span>
+</body>
+</html>

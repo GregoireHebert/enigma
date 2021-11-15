@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon super site</title>
+</head>
+<body>
+    <a href="/"><< retour</a>
+<?php
+    if ($_GET['error'] ?? null) {
+?>
+    <span style="background-color: coral;font-weight: bold">Invalid Credentials</span>
+<?php
+    }
+?>
+    <form action="<?php echo $routing->getPath('loginCheck'); ?>" method="post">
+        <label for="username">Username :</label>
+        <input type="text" id="username" name="username" value="<?php echo $_SESSION['last_username'] ?? ''; ?>"/>
+        <label for="password">Password :</label>
+        <input type="password" id="password" name="password"/>
+        <input type="submit" name="submit" value="connecter"/>
+    </form>
+</body>
+</html>

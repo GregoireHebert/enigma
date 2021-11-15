@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+try {
+    require_once (__DIR__.'/../src/database/connector.php');
+    $pdo = \App\Database\Connector::getPdo();
+
+    $pdo->exec('
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `sender` integer,
+  `message` text,
+  `date` integer
+);');
+
+    $pdo->exec('
+CREATE TABLE IF NOT EXISTS `post` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `sender` integer,
+  `message` text,
+  `sujet` text
+);');
+
+    $pdo->exec('
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `post` integer,
+  `message` text,
+  `sender` integer
+);');
+
+    $pdo->exec('
+CREATE TABLE IF NOT EXISTS `inscrits` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `pseudo` varchar,
+  `password` varchar,
+  `avatar` varchar
+);');
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}

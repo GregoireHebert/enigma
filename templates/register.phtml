@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon super site</title>
+</head>
+<body>
+    <h1>Création de compte</h1>
+    <a href="<?php echo $routing->getPath('home'); ?>"><< retour</a>
+    <form action="<?php echo $routing->getPath('newAccount'); ?>" method="post" enctype="multipart/form-data">
+        <label for="username">Username :</label>
+        <input type="text" id="username" name="username"/>
+        <br/>
+        <label for="password">Password :</label>
+        <input type="password" id="password" name="password"/>
+        <br/>
+        <label for="avatar">Avatar :</label>
+        <input type="file" id="avatar" name="avatar"/>
+        <br/>
+        <br/>
+        <input type="submit" name="submit" value="Créer mon compte"/>
+    </form>
+</body>
+</html>

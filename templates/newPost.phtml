@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon super site</title>
+</head>
+<body>
+    <h1>Forum</h1>
+    <h3>Nouveau post</h3>
+
+    <a href="<?php echo $routing->getPath('forum'); ?>"><< retour</a>
+
+    <form method="post">
+        <label for="sujet">Sujet :</label>
+        <input type="text" name="sujet" id="sujet"/><br/>
+        <label for="texte">Texte :</label>
+        <textarea name="texte" id="texte" cols="30" rows="10"></textarea>
+        <br/>
+        <br/>
+        <input type="submit" name="submit" value="Nouveau post"/>
+    </form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon super site</title>
+</head>
+<body>
+    <h1>Forum</h1>
+    <a href="<?php echo $routing->getPath('forum'); ?>"><< retour</a>
+
+    <h3><?php echo $post->sujet ?> (par <?php echo $post->author->pseudo ?>)</h3>
+    <br>
+    <div>
+        <?php echo $post->message; ?>
+    </div>
+    <hr>
+
+    <?php foreach ($commentaires as $commentaire) { ?>
+        <span>(<?php echo $commentaire->author->pseudo; ?>) : <?php echo $commentaire->message;?></span>
+    <?php } ?>
+
+
+    <form method="post">
+        <label for="commentaire">Commentaire :</label>
+        <textarea name="commentaire" id="commentaire" cols="30" rows="10"></textarea>
+        <br/>
+        <br/>
+        <input type="submit" name="submit" value="Commenter"/>
+    </form>
+</body>
+</html>

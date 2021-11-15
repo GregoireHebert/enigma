@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon super site</title>
+</head>
+<body>
+<?php if ($_SESSION['connected'] ?? null) { ?>
+    <a href="<?php echo $routing->getPath('logout'); ?>">Me déconnecter</a>
+    <a href="<?php echo $routing->getPath('fibonnaci'); ?>">Afficher fibonacci</a>
+    <a href="<?php echo $routing->getPath('chat'); ?>">Chat</a>
+    <a href="<?php echo $routing->getPath('forum'); ?>">Forum</a>
+<?php } else { ?>
+    <a href="<?php echo $routing->getPath('login'); ?>">Me connecter</a>
+    <a href="<?php echo $routing->getPath('newAccount'); ?>">Créer un compte</a>
+<?php } ?>
+</body>
+</html>

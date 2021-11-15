@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon super site</title>
+</head>
+<p>
+    <h1>Chat</h1>
+    <p><a href="<?php echo $routing->getPath('home'); ?>"><< retour</a></p>
+
+
+    <?php if ($error ?? false) { ?>
+    <span style="background-color: coral;font-weight: bold;"><?php echo $error; ?></span>
+    <?php } ?>
+
+
+    <div>
+        <dl>
+        <?php foreach ($messages as $message) { ?>
+            <dt>
+                <?php
+                    if (!empty($message->avatar)) {
+                ?>
+                    <img src="/upload/<?php echo $message->avatar; ?>" alt="avatar" width="64px">
+                <?php
+                    }
+                    echo $message->getDate()->format('d/m/Y H:i:s') . ' - ' .strip_tags($message->pseudo);
+                ?>
+                dit :
+            </dt>
+            <dd><?php echo filter_var($message->message, FILTER_SANITIZE_SPECIAL_CHARS);?></dd>
+        <?php } ?>
+        </dl>
+    </div>
+    <hr>
+    <form method="post">
+        <label for="message">Message :</label>
+        <textarea id="message" name="message" placeholder="Mon message"></textarea>
+        <br>
+        <input type="submit" value="Envoyer"/>
+    </form>
+    <script>
+        setTimeout(() => {
+            window.location.reload();
+        }, 20000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon super site</title>
+</head>
+<body>
+    <h1>Forum</h1>
+
+    <a href="<?php echo $routing->getPath('home'); ?>"><< retour</a><br/>
+    <a href="<?php echo $routing->getPath('newPost'); ?>">+ nouveau post</a><br/>
+
+    <ul>
+<?php
+    foreach ($posts as $post) {
+?>
+        <li><?php echo $post->sujet; ?> - <a href="<?php echo $routing->getPath('post', ['id'=>$post->id]); ?>">lire</a></li>
+<?php
+    }
+?>
+    </ul>
+
+</body>
+</html>
