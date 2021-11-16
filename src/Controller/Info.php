@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace src\Controller;
 
+use src\Http\Response;
+use src\Router\Route;
 use src\Router\Router;
+use src\Templating\Render;
 
+#[Route(path: '/info', name: 'info')]
 class Info
 {
     public function __construct(private Router $router)
@@ -14,25 +18,14 @@ class Info
 
     public function display()
     {
-        $routeHome = $this->router->getPath('accueil');
-        $routeInfo = $this->router->getPath('info');
+        $content = (new Render())->render('layout', [
+            'routeHome' => $this->router->getPath('accueil'),
+            'routeInfo' => $this->router->getPath('info'),
+            'routeQuery' => $this->router->getPath('query', ['name'=>'greg']),
+            'content' => (new Render())->render('info'),
+        ]);
 
-        echo <<<HTML
-<html>
-    <head>
-        <title>Mon super site</title>    
-    </head>
-    <body>
-        <h1>Mon super site !</h1>
-        <p>
-            Welcome :)
-        </p>
-        <p>
-            <a href="$routeHome">Home</a>
-            <a href="$routeInfo">Info</a>
-        </p>
-    </body>
-</html>
-HTML;
+        $response = new Response($content);
+        $response->display();
     }
 }

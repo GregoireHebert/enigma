@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Mon super site</title>
+    </head>
+    <body>
+        <h1>Mon super site !</h1>
+        <p>
+            <a href="{{ routeHome }}">Home</a>
+            <a href="{{ routeInfo }}">Info</a>
+            <a href="{{ routeQuery }}">Query</a>
+        </p>
+        {{ content|raw }}
+    </body>
+</html>
