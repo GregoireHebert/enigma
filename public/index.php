@@ -2,38 +2,15 @@
 
 declare(strict_types=1);
 
-openlog('App', LOG_PID|LOG_PERROR, LOG_LOCAL0);
-define('APP_DEBUG', true);
-
-spl_autoload_register(static function($className) {
-    $path = __DIR__.'/../'.str_replace(['\\', 'App'], ['/', 'src'], $className).'.php';
-    if (file_exists($path)) {
-        require_once ($path);
-    }
+spl_autoload_register(function(string $className) {
+    $path = str_replace('\\', DIRECTORY_SEPARATOR, $className).'.php';
+    require_once (__DIR__."/../$path");
 });
 
-session_start();
+use src\Router\Router;
 
-require_once (__DIR__.'/../config/routes.php');
+$router = new Router();
+$controllerName = $router->getController($_SERVER['PATH_INFO'] ?? '/home');
 
-use App\Controller\HttpError;
-use App\Controller\Controller;
-
-try {
-    $controllerName = $routing->getController();
-
-    $controller = new $controllerName();
-    if (!$controller instanceof Controller) {
-        throw new LogicException("Controller $controllerName must implement Controller interface");
-    }
-
-    $controller->display($routing);
-
-} catch (Error|Exception $e) {
-
-    $controller = new HttpError();
-    $controller->display(400, $e);
-} finally {
-    closelog();
-    exit(0);
-}
+$controller = new $controllerName($router);
+$controller->display();

@@ -6,7 +6,7 @@ namespace src\Controller;
 
 use src\Router\Router;
 
-class Home
+class Info
 {
     public function __construct(private Router $router)
     {
@@ -34,6 +34,5 @@ class Home
     </body>
 </html>
 HTML;
-
     }
 }

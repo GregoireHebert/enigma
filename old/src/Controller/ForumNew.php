@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Database\Connector;
-use App\Entity\Post;
 use App\Routing\Routing;
 use App\Security\Security;
 
@@ -17,7 +16,6 @@ class ForumNew implements Controller
 
         if (isset($_POST['texte']) && !empty($_POST['texte'])){
             $pdo = Connector::getPdo();
-            $texte = $_POST['texte'];
 
             $preparation = $pdo->prepare('INSERT INTO post VALUES (null, :author, :texte, :sujet)');
             $preparation->bindParam('texte', $_POST['texte']);
