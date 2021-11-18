@@ -10,13 +10,13 @@ use src\Templating\Render;
 use src\Router\Route;
 
 #[Route(path: '/home', name: 'accueil')]
-class Home
+class Home implements Controller
 {
     public function __construct(private Router $router)
     {
     }
 
-    public function display()
+    public function display(): void
     {
         $content = (new Render())->render('layout', [
             'routeHome' => $this->router->getPath('accueil'),

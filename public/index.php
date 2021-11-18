@@ -10,12 +10,20 @@ spl_autoload_register(function(string $className) {
 use src\Router\Router;
 use src\Exception\NotFoundHttpException;
 use src\Http\Response;
+use src\Controller\Controller;
 
 $router = new Router();
 
 try {
     $controllerName = $router->getController($_SERVER['PATH_INFO'] ?? '/home');
     $controller = new $controllerName($router);
+
+    if (!$controller instanceof Controller) {
+        throw new LogicException(
+            sprintf('Controller "%s" must implement %s interface', $controllerName, Controller::class)
+        );
+    }
+
     $controller->display();
 } catch(NotFoundHttpException $exception) {
 
@@ -46,6 +54,6 @@ HTML;
     $response->display();
 
 } catch(Exception $exception) {
-    $response = new Response('', 500);
+    $response = new Response($exception->getMessage(), 500);
     $response->display();
 }

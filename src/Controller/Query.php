@@ -10,13 +10,13 @@ use src\Router\Router;
 use src\Templating\Render;
 
 #[Route(path: '/query', name: 'query')]
-class Query
+class Query implements Controller
 {
     public function __construct(private Router $router)
     {
     }
 
-    public function display()
+    public function display(): void
     {
         $name = $_GET['name'] ?? 'anonyme';
 

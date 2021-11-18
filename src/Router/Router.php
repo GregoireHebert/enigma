@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace src\Router;
 
 use src\Exception\NotFoundHttpException;
+use src\Logger\LoggerAware;
 
 class Router
 {
+    use LoggerAware;
+
     private const CONTROLLERS_DIR = __DIR__.'/../Controller';
 
     /**
@@ -42,10 +45,12 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route->path === $pathInfo) {
+                $this->log("Controller found '$route->controller' for path $pathInfo");
                 return $route->controller;
             }
         }
 
+        $this->log("Controller Not found for path $pathInfo", 'error', ['routes' => $this->routes]);
         throw new NotFoundHttpException();
     }
 
@@ -72,10 +77,11 @@ class Router
                     $this->routes[] = $route;
                 }
             }
+        }
 
-            if (empty($this->routes)) {
-                trigger_error('No routes declared', E_USER_WARNING);
-            }
+        if (empty($this->routes)) {
+            $this->log('No routes declared', 'error');
+            trigger_error('No routes declared', E_USER_WARNING);
         }
     }
 }

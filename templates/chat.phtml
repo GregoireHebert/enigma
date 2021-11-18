@@ -1,0 +1,10 @@
+<ul>
+    {{ messages|raw }}
+</ul>
+
+<form method="POST">
+    <label for="author">Pseudo :</label>
+    <input type="text" id="author" name="author" placeholder="Auteur"><br/>
+    <textarea id="message" name="message" placeholder="Votre message"></textarea>
+    <input type="submit" name="Envoyer" value="Envoyer">
+</form>

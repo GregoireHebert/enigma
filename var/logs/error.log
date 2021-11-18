@@ -1,0 +1,66 @@
+2021-11-17 10:34:42 - Controller Not found for path /hofezf
+array (
+  'routes' => 
+  array (
+    0 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/home',
+       'name' => 'accueil',
+       'controller' => 'src\\Controller\\Home',
+    )),
+    1 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/info',
+       'name' => 'info',
+       'controller' => 'src\\Controller\\Info',
+    )),
+    2 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/query',
+       'name' => 'query',
+       'controller' => 'src\\Controller\\Query',
+    )),
+  ),
+)
+2021-11-17 15:38:50 - Controller Not found for path /pasadaccord
+array (
+  'routes' => 
+  array (
+    0 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/pasdaccord',
+       'name' => 'chat',
+       'controller' => 'src\\Controller\\Chat',
+    )),
+    1 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/deleteMood',
+       'name' => 'deleteMood',
+       'controller' => 'src\\Controller\\DeleteMood',
+    )),
+    2 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/form',
+       'name' => 'form',
+       'controller' => 'src\\Controller\\Form',
+    )),
+    3 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/home',
+       'name' => 'accueil',
+       'controller' => 'src\\Controller\\Home',
+    )),
+    4 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/info',
+       'name' => 'info',
+       'controller' => 'src\\Controller\\Info',
+    )),
+    5 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/query',
+       'name' => 'query',
+       'controller' => 'src\\Controller\\Query',
+    )),
+  ),
+)

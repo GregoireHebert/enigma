@@ -1,0 +1,92 @@
+Controller found 'src\Controller\Query' for path /query
+Controller found 'src\Controller\Info' for path /info
+Controller found 'src\Controller\Query' for path /query
+Controller found 'src\Controller\Home' for path /home
+Controller Not found for path /hofezf
+Controller Not found for path /hofezf
+array (
+  'routes' => 
+  array (
+    0 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/home',
+       'name' => 'accueil',
+       'controller' => 'src\\Controller\\Home',
+    )),
+    1 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/info',
+       'name' => 'info',
+       'controller' => 'src\\Controller\\Info',
+    )),
+    2 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/query',
+       'name' => 'query',
+       'controller' => 'src\\Controller\\Query',
+    )),
+  ),
+)
+Controller Not found for path /hofezf
+array (
+  'routes' => 
+  array (
+    0 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/home',
+       'name' => 'accueil',
+       'controller' => 'src\\Controller\\Home',
+    )),
+    1 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/info',
+       'name' => 'info',
+       'controller' => 'src\\Controller\\Info',
+    )),
+    2 => 
+    src\Router\Route::__set_state(array(
+       'path' => '/query',
+       'name' => 'query',
+       'controller' => 'src\\Controller\\Query',
+    )),
+  ),
+)
+2021-11-17 10:35:00 - Controller found 'src\Controller\Home' for path /home
+2021-11-17 10:49:56 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 10:50:14 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 10:57:37 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 11:09:55 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 11:10:16 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 13:30:36 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 13:30:43 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 13:31:24 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 13:32:39 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 13:59:12 - Controller found 'src\Controller\DeleteMood' for path /deleteMood
+2021-11-17 13:59:12 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 14:15:12 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 14:15:17 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 14:15:18 - Controller found 'src\Controller\DeleteMood' for path /deleteMood
+2021-11-17 14:15:18 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 14:42:07 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 14:52:09 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 14:52:56 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 14:54:12 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 14:59:56 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 14:59:59 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 15:00:03 - Controller found 'src\Controller\DeleteMood' for path /deleteMood
+2021-11-17 15:00:03 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 15:11:01 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 15:38:57 - Controller found 'src\Controller\Chat' for path /pasdaccord
+2021-11-17 15:39:04 - Controller found 'src\Controller\Chat' for path /pasdaccord
+2021-11-17 15:39:09 - Controller found 'src\Controller\Chat' for path /pasdaccord
+2021-11-17 15:39:26 - Controller found 'src\Controller\Chat' for path /pasdaccord
+2021-11-17 15:39:34 - Controller found 'src\Controller\Chat' for path /pasdaccord
+2021-11-17 15:43:51 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 15:43:53 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 15:43:54 - Controller found 'src\Controller\DeleteMood' for path /deleteMood
+2021-11-17 15:44:07 - Controller found 'src\Controller\DeleteMood' for path /deleteMood
+2021-11-17 15:44:07 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 15:44:10 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 15:44:11 - Controller found 'src\Controller\DeleteMood' for path /deleteMood
+2021-11-17 15:44:11 - Controller found 'src\Controller\Form' for path /form
+2021-11-17 15:44:24 - Controller found 'src\Controller\Chat' for path /pasdaccord
