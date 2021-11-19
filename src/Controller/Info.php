@@ -19,9 +19,6 @@ class Info implements Controller
     public function display(): void
     {
         $content = (new Render())->render('layout', [
-            'routeHome' => $this->router->getPath('accueil'),
-            'routeInfo' => $this->router->getPath('info'),
-            'routeQuery' => $this->router->getPath('query', ['name'=>'greg']),
             'content' => (new Render())->render('info'),
         ]);
 

@@ -5,9 +5,9 @@
     <body>
         <h1>Mon super site !</h1>
         <p>
-            <a href="{{ routeHome }}">Home</a>
-            <a href="{{ routeInfo }}">Info</a>
-            <a href="{{ routeQuery }}">Query</a>
+            <a href="{{ path(accueil) }}">Home</a>
+            <a href="{{ path(info) }}">Info</a>
+            <a href="{{ path(query, {"name": "greg"}) }}">Query</a>
         </p>
         {{ content|raw }}
     </body>

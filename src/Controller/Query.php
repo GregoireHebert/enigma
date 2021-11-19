@@ -21,9 +21,6 @@ class Query implements Controller
         $name = $_GET['name'] ?? 'anonyme';
 
         $content = (new Render())->render('layout', [
-            'routeHome' => $this->router->getPath('accueil'),
-            'routeInfo' => $this->router->getPath('info'),
-            'routeQuery' => $this->router->getPath('query', ['name'=>'greg']),
             'content' => (new Render())->render('query', ['name' => $name]),
         ]);
 
