@@ -2,10 +2,15 @@
 
 declare(strict_types=1);
 
-$path = $_SERVER['PATH_INFO'] ?? '/';
-echo '<pre>';
-var_dump($path);
-echo '</pre>';
+spl_autoload_register(static function(string $fqcn) {
+    $filePath = str_replace(['\\', 'App'], ['/', 'src'], $fqcn).'.php';
+    require_once(__DIR__.'/../'.$filePath);
+});
+
+use App\Infra\Http\Request;
+
+$request = Request::createFromGlobals();
+$path = $request->getPath();
 
 if ($path === '/') {
     echo 'World';
@@ -14,5 +19,3 @@ if ($path === '/') {
 if ($path === '/bar') {
     echo 'Bar';
 }
-
-php -S localhost:8000 -t public
