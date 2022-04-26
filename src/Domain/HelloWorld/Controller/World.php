@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\HelloWorld\Controller;
 
+use App\Infra\Http\Response;
+
 class World
 {
-    public function __invoke()
+    public function __invoke(): Response
     {
-        return 'world';
+        return new Response('world');
     }
 }
