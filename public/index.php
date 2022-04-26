@@ -12,8 +12,24 @@ use App\Infra\Routing\Router;
 use App\Infra\Http\Response;
 use App\Infra\DependencyInjection\Container;
 use App\Infra\Log\Logger;
+use App\Infra\EventDispatcher\EventDispatcher;
+use App\Infra\EventDispatcher\Events\RequestEvent;
+use App\Domain\HelloWorld\EventListeners\RequestEventListener;
+
+$eventDispatcher = new EventDispatcher();
+$eventDispatcher->addListener(new RequestEventListener());
 
 $request = Request::createFromGlobals();
+
+$requestEvent = new RequestEvent($request);
+$eventDispatcher->dispatch($requestEvent);
+$request = $requestEvent->getRequest();
+
+if ($request instanceof Response) {
+    $request->send();
+    exit(1);
+}
+
 $router = new Router();
 
 $container = new Container(
