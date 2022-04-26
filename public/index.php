@@ -24,7 +24,8 @@ $container = new Container(
 
 $controller = $router->getController($request->getPath());
 
-$response = $controller($container);
+$arguments = $container->resolveArguments($controller, '__invoke');
+$response = $controller(...$arguments);
 
 if (!$response instanceof Response) {
     throw new LogicException('Controller must return a '.Response::class.' object, '.gettype($response).'given.');

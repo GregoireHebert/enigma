@@ -7,10 +7,17 @@ namespace App\Infra\DependencyInjection;
 class Container
 {
     private array $services;
+    private ArgumentsResolver $argumentsResolver;
 
     public function __construct(...$services)
     {
         $this->services = $services;
+        $this->argumentsResolver = new ArgumentsResolver($this);
+    }
+
+    public function resolveArguments($class, string $method): array
+    {
+        return $this->argumentsResolver->resolveArguments($class, $method);
     }
 
     public function get(string $name): mixed
@@ -22,7 +29,8 @@ class Container
             }
 
             if (is_string($service) && $service === $name) {
-                $this->services[$key] = new $service();
+                $arguments = $this->resolveArguments($service, '__construct');
+                $this->services[$key] = new $service(...$arguments);
                 return $this->services[$key];
             }
         }
