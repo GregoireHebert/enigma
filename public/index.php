@@ -8,14 +8,12 @@ spl_autoload_register(static function(string $fqcn) {
 });
 
 use App\Infra\Http\Request;
+use App\Infra\Routing\Router;
 
 $request = Request::createFromGlobals();
-$path = $request->getPath();
+$router = new Router();
 
-if ($path === '/') {
-    echo 'World';
-}
+$controller = $router->getController($request->getPath());
 
-if ($path === '/bar') {
-    echo 'Bar';
-}
+$response = $controller();
+echo $response;
