@@ -15,10 +15,15 @@ class Container
 
     public function get(string $name): mixed
     {
-        foreach ($this->services as $service)
+        foreach ($this->services as $key => $service)
         {
-            if ($service::class === $name) {
+            if (is_object($service) && $service::class === $name) {
                 return $service;
+            }
+
+            if (is_string($service) && $service === $name) {
+                $this->services[$key] = new $service();
+                return $this->services[$key];
             }
         }
 

@@ -19,7 +19,7 @@ $router = new Router();
 $container = new Container(
   $request,
   $router,
-  new Logger()
+  Logger::class
 );
 
 $controller = $router->getController($request->getPath());
