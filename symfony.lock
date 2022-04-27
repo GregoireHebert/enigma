@@ -80,8 +80,14 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },
+    "knplabs/knp-markdown-bundle": {
+        "version": "1.10.0"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
+    },
+    "michelf/php-markdown": {
+        "version": "1.9.1"
     },
     "monolog/monolog": {
         "version": "2.5.0"

@@ -7,7 +7,7 @@
     Publié le {{ article.datePublication|date('d/m/Y h:i:s') }}<br/>
     <hr>
     <p>
-        {{ article.contenu }}
+        {{ article.contenu|raw }}
     </p>
     <a href="{{ path('home') }}">retour</a>
 </div>
