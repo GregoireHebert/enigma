@@ -9,4 +9,9 @@ use App\Domain\Blog\Entity\Article;
 interface ArticleDataSourceInterface
 {
     public function getArticle(string $slug): ?Article;
+
+    /**
+     * @return array<Article>
+     */
+    public function getAll(): iterable;
 }

@@ -19,6 +19,22 @@ class ArticleDataSource
         $this->sources = $sources;
     }
 
+    /**
+     * @return array<Article>
+     */
+    public function getAll(): iterable
+    {
+        foreach ($this->sources as $source) {
+            foreach ($source->getAll() as $article){
+                if ($article === null) {
+                    continue;
+                }
+
+                yield $article;
+            }
+        }
+    }
+
     public function getArticle(string $slug): ?Article
     {
         foreach ($this->sources as $source) {
