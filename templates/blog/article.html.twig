@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div>
+    <h1>{{ article.titre }}</h1>
+    Auteur : <span>{{ article.auteur }}</span><br/>
+    Publié le {{ article.datePublication|date('d/m/Y h:i:s') }}<br/>
+    <hr>
+    <p>
+        {{ article.contenu }}
+    </p>
+    <a href="{{ path('home') }}">retour</a>
+</div>
+{% endblock %}
+
