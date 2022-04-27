@@ -15,9 +15,9 @@ class Kernel extends BaseKernel
 
     protected function build(ContainerBuilder $container)
     {
-        $container->registerForAutoconfiguration(ArticleDataSourceInterface::class)
-            ->addTag('app.article_data_source');
-
-        $container->addCompilerPass(new ArticleDataSourcePass());
+//        $container->registerForAutoconfiguration(ArticleDataSourceInterface::class)
+//            ->addTag('app.article_data_source');
+//
+//        $container->addCompilerPass(new ArticleDataSourcePass());
     }
 }

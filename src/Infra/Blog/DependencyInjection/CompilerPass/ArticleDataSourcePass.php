@@ -14,15 +14,15 @@ class ArticleDataSourcePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $articleDataSourceDefinition = $container->getDefinition(ArticleDataSource::class);
-
-        $servicesIds = $container->findTaggedServiceIds('app.article_data_source');
-        $services = [];
-
-        foreach ($servicesIds as $id => $tags) {
-            $services[] = new Reference($id);
-        }
-
-        $articleDataSourceDefinition->setArgument('$sources', $services);
+//        $articleDataSourceDefinition = $container->getDefinition(ArticleDataSource::class);
+//
+//        $servicesIds = $container->findTaggedServiceIds('app.article_data_source');
+//        $services = [];
+//
+//        foreach ($servicesIds as $id => $tags) {
+//            $services[] = new Reference($id);
+//        }
+//
+//        $articleDataSourceDefinition->setArgument('$sources', $services);
     }
 }
