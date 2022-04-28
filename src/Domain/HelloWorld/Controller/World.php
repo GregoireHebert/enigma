@@ -9,9 +9,13 @@ use App\Infra\Http\Response;
 
 class World
 {
-    public function __invoke(Request $request): Response
+    public function __construct(private Request $request)
     {
-        $name = $request->getQuery('name', 'anonymous');
+    }
+
+    public function __invoke(): Response
+    {
+        $name = $this->request->getQuery('name', 'anonymous');
 
         return new Response('world '.$name);
     }

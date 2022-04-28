@@ -21,10 +21,8 @@ class Router
         ];
     }
 
-    public function getController(string $path): callable
+    public function getController(string $path): string
     {
-        $class = $this->routes[$path] ?? $this->routes['/404'];
-
-        return new $class;
+        return $this->routes[$path] ?? $this->routes['/404'];
     }
 }

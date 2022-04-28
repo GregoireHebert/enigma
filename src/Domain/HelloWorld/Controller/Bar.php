@@ -9,9 +9,13 @@ use App\Infra\Log\Logger;
 
 class Bar
 {
-    public function __invoke(Logger $logger): Response
+    public function __construct(private Logger $logger)
     {
-        $logger->log('['.time().'] bar');
+    }
+
+    public function __invoke(): Response
+    {
+        $this->logger->log('['.time().'] bar');
         return new Response('bar');
     }
 }

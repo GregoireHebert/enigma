@@ -6,9 +6,9 @@ namespace App\Infra\Http;
 
 use App\Domain\HelloWorld\EventListeners\RequestEventListener;
 use App\Infra\DependencyInjection\Container;
+use App\Infra\DependencyInjection\ContainerBuilder;
 use App\Infra\EventDispatcher\EventDispatcher;
 use App\Infra\EventDispatcher\Events\RequestEvent;
-use App\Infra\Log\Logger;
 use App\Infra\Routing\Router;
 
 class HttpKernel
@@ -34,8 +34,8 @@ class HttpKernel
 
         $controller = $this->router->getController($request->getPath());
 
-        $arguments = $this->container->resolveArguments($controller, '__invoke');
-        $response = $controller(...$arguments);
+        $controller = $this->container->get($controller);
+        $response = $controller();
 
         if (!$response instanceof Response) {
             throw new \LogicException('Controller must return a '.Response::class.' object, '.gettype($response).'given.');
@@ -56,11 +56,8 @@ class HttpKernel
         $this->eventDispatcher = new EventDispatcher();
         $this->eventDispatcher->addListener(new RequestEventListener());
 
-        $this->container = new Container(
-            $this->request,
-            $this->router,
-            Logger::class
-        );
+        $this->container = (new ContainerBuilder())->build();
+        $this->container->addService(Request::class, $this->request);
 
         $this->booted = true;
     }
