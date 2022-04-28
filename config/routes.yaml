@@ -1,4 +1,7 @@
-controllers:
+blog:
     resource: ../src/Infra/Blog/Controller/
     type: annotation
 
+admin:
+    resource: ../src/Infra/Admin/Controller/
+    type: annotation
