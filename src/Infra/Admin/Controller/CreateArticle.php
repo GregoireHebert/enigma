@@ -22,7 +22,7 @@ class CreateArticle extends AbstractController
     {
     }
 
-    #[Route(path: '/create')]
+    #[Route(path: '/create', name: 'article_create')]
     public function create()
     {
         $article = new Article();

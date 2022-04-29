@@ -18,6 +18,11 @@
         {% endblock %}
     </head>
     <body>
+        {% block headings %}
+            {% for link in menu() %}
+                <a href="{{ link.path }}" target="{{ link.target }}">{{ link.label }}</a>
+            {% endfor %}
+        {% endblock %}
         {% block body %}{% endblock %}
     </body>
 </html>
