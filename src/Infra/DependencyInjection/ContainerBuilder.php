@@ -12,10 +12,11 @@ use App\Infra\Routing\Router;
 
 class ContainerBuilder
 {
-    /**
-     * @var array<ServiceDefinition>
-     */
+    /** @var array<ServiceDefinition> */
     private array $definitions;
+
+    /** @var array<CompilerPassInterface> */
+    private array $compilerPasses;
 
     private ArgumentsResolver $argumentsResolver;
 
@@ -39,8 +40,6 @@ class ContainerBuilder
     {
         $services = $this->servicesBooted;
 
-
-
         foreach ($this->definitions as $definition)
         {
             $class = $definition->getClass();
@@ -49,6 +48,15 @@ class ContainerBuilder
             $services[] = new Service($class, $arguments);
         }
 
+        foreach ($this->compilerPasses as $compilerPass) {
+            $compilerPass->process($this);
+        }
+
         return new Container(...$services);
     }
+
+    public function addDefinition(ServiceDefinition $definition) {}
+    public function getDefinition(string $id): ServiceDefinition {}
+    public function findTaggedServiceIds(string $id): array {}
+
 }
