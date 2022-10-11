@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Core\Http\Router;
 
-use App\Controller\Connect;
-use App\Controller\Disconnect;
-use App\Controller\Me;
-use App\Controller\UserRegister;
+use App\Security\Controller\Connect;
+use App\Security\Controller\Disconnect;
+use App\Account\Controller\Me;
+use App\Account\Controller\UserRegister;
 use App\Core\Http\Request;
 
 class Router

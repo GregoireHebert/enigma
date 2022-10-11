@@ -49,8 +49,6 @@ class UserRepository extends Repository
         }
 
         $userArray['roles'] = json_decode($userArray['roles']);
-        $user = new User(...$userArray);
-
-        return $user;
+        return new User(...$userArray);
     }
 }

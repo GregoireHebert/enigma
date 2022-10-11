@@ -2,13 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Account\Controller;
 
 use App\Core\Http\Request;
-use App\Security\Authentication\Authenticator;
-use App\Security\Exception\AuthenticationException;
 use App\Security\Repository\UserRepository;
-use App\Security\Security;
 use App\Security\UserFactory;
 use App\Validator\UserValidator;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -16,16 +13,22 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-class Me
+class UserRegister
 {
     public function __invoke(Request $request): string
     {
-        $security = new Security();
-        if (null === $user = $security->getUser()) {
-            throw new AuthenticationException();
-        }
+        $userFactory = new UserFactory();
+        $user = $userFactory->createUserFromRequest($request);
 
-        http_response_code(200);
+        $validator = new UserValidator();
+        $validator->validate($user);
+
+        $user->setPassword(password_hash($user->getPassword(), 'argon2id'));
+
+        $userRepository = new UserRepository();
+        $userRepository->save($user);
+
+        http_response_code(201);
         header('Content-Type: application/json');
 
         $serializer = new Serializer(

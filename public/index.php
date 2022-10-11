@@ -24,7 +24,5 @@ try {
     echo sprintf('{"field": "%s", "description": "%s"}', $violation->fieldName, $violation->getMessage());
 } catch (HttpException $exception) {
     http_response_code($exception->httpStatusCode);
-    header('Content-Type: application/json');
-
     echo $exception->getMessage();
 }

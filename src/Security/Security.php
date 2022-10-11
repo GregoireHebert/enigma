@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use App\Security\Exception\ForbiddenHttpException;
+
 class Security
 {
     public function removeUser(): void
@@ -19,5 +21,12 @@ class Security
     public function getUser(): ?User
     {
         return $_SESSION['user'] ?? null;
+    }
+
+    public function hasRole(string $role): void
+    {
+        if (null === ($user = $this->getUser()) || !in_array($role, $user->getRoles(), true)) {
+            throw new ForbiddenHttpException();
+        }
     }
 }
