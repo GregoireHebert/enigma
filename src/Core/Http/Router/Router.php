@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Http\Router;
 
 use App\Controller\Connect;
+use App\Controller\Disconnect;
 use App\Controller\Me;
 use App\Controller\UserRegister;
 use App\Core\Http\Request;
@@ -26,6 +27,10 @@ class Router
 
         if ($path === '/login' && $method === 'POST') {
             return (new Connect())($request);
+        }
+
+        if ($path === '/logout' && $method === 'POST') {
+            return (new Disconnect())($request);
         }
 
         if ($path === '/me' && $method === 'GET') {

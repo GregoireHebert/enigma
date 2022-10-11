@@ -44,9 +44,11 @@ class UserRepository extends Repository
         $preparation->setFetchMode(\PDO::FETCH_ASSOC);
         $preparation->execute();
 
-        $userArray = $preparation->fetch();
-        $userArray['roles'] = json_decode($userArray['roles']);
+        if (!is_array($userArray = $preparation->fetch())) {
+            return null;
+        }
 
+        $userArray['roles'] = json_decode($userArray['roles']);
         $user = new User(...$userArray);
 
         return $user;

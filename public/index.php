@@ -10,6 +10,7 @@ session_start();
 use App\Core\Http\Router\Router;
 use App\Core\Http\Request;
 use App\Validator\ConstraintViolation;
+use App\Core\Http\Exception\HttpException;
 
 $request = Request::createFromGlobals();
 $router = new Router();
@@ -21,4 +22,9 @@ try {
     header('Content-Type: application/json');
 
     echo sprintf('{"field": "%s", "description": "%s"}', $violation->fieldName, $violation->getMessage());
+} catch (HttpException $exception) {
+    http_response_code($exception->httpStatusCode);
+    header('Content-Type: application/json');
+
+    echo $exception->getMessage();
 }
