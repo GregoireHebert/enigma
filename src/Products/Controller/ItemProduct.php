@@ -24,7 +24,7 @@ class ItemProduct
             throw new NotFoundHttpException();
         }
 
-        http_response_code(201);
+        http_response_code(200);
         header('Content-Type: application/json');
 
         $serializer = new Serializer(

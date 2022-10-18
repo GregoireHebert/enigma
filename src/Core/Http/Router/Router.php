@@ -6,8 +6,10 @@ namespace App\Core\Http\Router;
 
 use App\Core\Http\Exception\NotFoundHttpException;
 use App\Products\Controller\AddProduct;
+use App\Products\Controller\DeleteProduct;
 use App\Products\Controller\ItemProduct;
 use App\Products\Controller\ListProducts;
+use App\Products\Controller\PutProduct;
 use App\Security\Controller\Connect;
 use App\Security\Controller\Disconnect;
 use App\Account\Controller\Me;
@@ -27,6 +29,8 @@ class Router
         $this->routes['products_add'] = new Route('/products', 'POST', AddProduct::class);
         $this->routes['products_get_collection'] = new Route('/products', 'GET', ListProducts::class);
         $this->routes['products_get_item'] = new Route('/products/(?<id>.*)', 'GET', ItemProduct::class);
+        $this->routes['products_put_item'] = new Route('/products/(?<id>.*)', 'PUT', PutProduct::class);
+        $this->routes['products_delete_item'] = new Route('/products/(?<id>.*)', 'DELETE', DeleteProduct::class);
         $this->routes['users_add'] = new Route('/users', 'POST', UserRegister::class);
     }
 

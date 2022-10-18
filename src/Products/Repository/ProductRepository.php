@@ -11,7 +11,7 @@ class ProductRepository extends Repository
 {
     public function createTable(): void
     {
-        $this->connection->query('CREATE TABLE IF NOT EXISTS `products` (`id` varchar(36), `name` varchar(255), `description` varchar(255), `starting_price` int(24), `estimation` int(24));');
+        $this->connection->query('CREATE TABLE IF NOT EXISTS `products` (`id` varchar(36) primary key, `name` varchar(255), `description` varchar(255), `starting_price` int(24), `estimation` int(24));');
     }
 
     /**
@@ -44,10 +44,22 @@ class ProductRepository extends Repository
         return new Product(...$product);
     }
 
+    public function remove(Product $product): void
+    {
+        $preparation = $this->connection->prepare(<<<SQL
+DELETE FROM products WHERE id = :id;
+SQL);
+
+        $id = $product->id;
+        $preparation->bindParam(':id', $id);
+
+        $preparation->execute();
+    }
+
     public function save(Product $product): void
     {
         $preparation = $this->connection->prepare(<<<SQL
-INSERT INTO products VALUES (:id, :name, :description, :starting_price, :estimation);
+INSERT OR REPLACE INTO products (id, name, description, starting_price, estimation) VALUES (:id, :name, :description, :starting_price, :estimation);
 SQL);
 
         $id = $product->id;

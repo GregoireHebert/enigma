@@ -16,3 +16,5 @@ $commandClass = 'App\\Command\\'.$commandName;
 $command = new $commandClass;
 
 $command->execute();
+
+exit (0);
