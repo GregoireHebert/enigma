@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Database;
 
-class Repository
+abstract class Repository
 {
     protected \PDO $connection;
 
