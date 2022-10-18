@@ -12,8 +12,7 @@ final class Request
         private array $post,
         private string $path,
         private string $method
-    )
-    {
+    ) {
     }
 
     public static function createFromGlobals(): self

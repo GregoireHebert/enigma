@@ -11,8 +11,10 @@ final class User
         private readonly string $email,
         private readonly string $username,
         private string $password,
-        private readonly array $roles)
-    {}
+        private readonly array $roles
+    )
+    {
+    }
 
     public function getId(): string
     {

@@ -11,7 +11,8 @@ class Product
         private int $estimation = 0,
         private int $startingPrice = 0,
         private string $name = '',
-        private string $description = '')
+        private string $description = ''
+    )
     {
     }
 
