@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core\Http\Router;
 
+use App\Products\Controller\AddProduct;
+use App\Products\Controller\ItemProduct;
+use App\Products\Controller\ListProducts;
 use App\Security\Controller\Connect;
 use App\Security\Controller\Disconnect;
 use App\Account\Controller\Me;
@@ -35,6 +38,19 @@ class Router
 
         if ($path === '/me' && $method === 'GET') {
             return (new Me())($request);
+        }
+
+        if ($path === '/products' && $method === 'POST') {
+            return (new AddProduct())($request);
+        }
+
+        if ($path === '/products' && $method === 'GET') {
+            return (new ListProducts())($request);
+        }
+
+        if (preg_match('#^/products/(?<id>.*)$#', $path, $matches) && $method === 'GET') {
+            $request->setAttribute('id', $matches['id']);
+            return (new ItemProduct())($request);
         }
 
         return '<h1>OUPS</h1>';

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\Products\Repository\ProductRepository;
 use App\Security\Repository\UserRepository;
 
 class InitDb
@@ -12,5 +13,8 @@ class InitDb
     {
         $userRepository = new UserRepository();
         $userRepository->createTable();
+
+        $productRepository = new ProductRepository();
+        $productRepository->createTable();
     }
 }

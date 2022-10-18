@@ -6,13 +6,6 @@ namespace App\Security\Controller;
 
 use App\Core\Http\Request;
 use App\Security\Authentication\Authenticator;
-use App\Security\Repository\UserRepository;
-use App\Security\UserFactory;
-use App\Validator\UserValidator;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class Connect
 {

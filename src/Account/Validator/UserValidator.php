@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Validator;
+namespace App\Account\Validator;
 
 use App\Security\User;
+use App\Validator\ConstraintViolation;
+use App\Validator\Validator;
 
 class UserValidator implements Validator
 {

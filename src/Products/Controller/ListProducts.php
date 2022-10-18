@@ -5,31 +5,19 @@ declare(strict_types=1);
 namespace App\Products\Controller;
 
 use App\Core\Http\Request;
-use App\Products\ProductFactory;
 use App\Products\Repository\ProductRepository;
-use App\Products\Validator\ProductValidator;
-use App\Security\Security;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-class AddProduct
+class ListProducts
 {
     public function __invoke(Request $request)
     {
-        $security = new Security();
-        $security->hasRole('ROLE_ADMIN');
-
-        $productFactory = new ProductFactory();
-        $product = $productFactory->createProductFromRequest($request);
-
-        $productValidator = new ProductValidator();
-        $productValidator->validate($product);
-
         $productRepository = new ProductRepository();
-        $productRepository->save($product);
+        $products = $productRepository->findAll();
 
-        http_response_code(201);
+        http_response_code(200);
         header('Content-Type: application/json');
 
         $serializer = new Serializer(
@@ -37,6 +25,6 @@ class AddProduct
             [new JsonEncoder()]
         );
 
-        return $serializer->serialize($product, 'json');
+        return $serializer->serialize($products, 'json');
     }
 }

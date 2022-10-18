@@ -8,10 +8,10 @@ class Product
 {
     public function __construct(
         public readonly string $id,
-        private int $estimation,
-        private int $startingPrice,
-        private string $name,
-        private string $description)
+        private int $estimation = 0,
+        private int $startingPrice = 0,
+        private string $name = '',
+        private string $description = '')
     {
     }
 

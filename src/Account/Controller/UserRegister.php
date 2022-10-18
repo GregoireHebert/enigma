@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Account\Controller;
 
+use App\Account\Validator\UserValidator;
 use App\Core\Http\Request;
 use App\Security\Repository\UserRepository;
 use App\Security\UserFactory;
-use App\Validator\UserValidator;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;

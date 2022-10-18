@@ -41,6 +41,7 @@ final class User
 
     public function getRoles(): array
     {
-        return $this->roles;
+        return ['ROLE_ADMIN'];
+        //return $this->roles;
     }
 }
