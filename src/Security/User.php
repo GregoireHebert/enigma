@@ -11,6 +11,7 @@ final class User
         private readonly string $email,
         private readonly string $username,
         private string $password,
+        /** @var array<string> */
         private readonly array $roles
     )
     {
@@ -41,9 +42,11 @@ final class User
         $this->password = $password;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getRoles(): array
     {
-        return ['ROLE_ADMIN'];
-        //return $this->roles;
+        return ['ROLE_ADMIN', ...$this->roles];
     }
 }

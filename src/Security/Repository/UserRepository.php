@@ -9,7 +9,7 @@ use App\Security\User;
 
 class UserRepository extends Repository
 {
-    public function createTable()
+    public function createTable(): void
     {
         $this->connection->query('CREATE TABLE IF NOT EXISTS `user` (`id` varchar(36), `username` varchar(255), `password` varchar(255), `email` varchar(255), `roles` varchar(255));');
     }

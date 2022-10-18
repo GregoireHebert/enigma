@@ -20,6 +20,6 @@ class UserValidator implements Validator
 
         assert(!empty($object->getUsername()), new ConstraintViolation('username', 'Username must be a non empty string.'));
         assert(filter_var($object->getEmail(), FILTER_VALIDATE_EMAIL), new ConstraintViolation('email', 'Email is not valid.'));
-        assert(preg_match(self::PASSWORD_REGEX, $object->getPassword()), new ConstraintViolation('password', 'Password must be 8 characters long, 1 upper case, 1 lower case, 1 digit and 1 special character (ex: -Secr3t.).'));
+        assert((bool) preg_match(self::PASSWORD_REGEX, $object->getPassword()), new ConstraintViolation('password', 'Password must be 8 characters long, 1 upper case, 1 lower case, 1 digit and 1 special character (ex: -Secr3t.).'));
     }
 }

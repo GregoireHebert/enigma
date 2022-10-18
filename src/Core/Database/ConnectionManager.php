@@ -6,7 +6,7 @@ namespace App\Core\Database;
 
 class ConnectionManager
 {
-    private static ?\PDO $connection = null;
+    protected static ?\PDO $connection = null;
 
     public function getConnection(): \PDO
     {

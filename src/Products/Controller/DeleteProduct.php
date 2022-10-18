@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class DeleteProduct
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): string
     {
         $id = $request->getAttribute('id');
 

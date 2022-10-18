@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class AddProduct
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): string
     {
         $security = new Security();
         $security->hasRole('ROLE_ADMIN');

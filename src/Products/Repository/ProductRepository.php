@@ -19,7 +19,10 @@ class ProductRepository extends Repository
      */
     public function findAll(): array
     {
-        $prepare = $this->connection->query('SELECT id, name, estimation, description, starting_price as startingPrice FROM products');
+        if (false === $prepare = $this->connection->query('SELECT id, name, estimation, description, starting_price as startingPrice FROM products')) {
+            return [];
+        }
+
         $prepare->setFetchMode(\PDO::FETCH_ASSOC);
         $products = $prepare->fetchAll();
 

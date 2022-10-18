@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class ListProducts
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): string
     {
         $productRepository = new ProductRepository();
         $products = $productRepository->findAll();

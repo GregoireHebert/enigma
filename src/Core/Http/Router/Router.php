@@ -50,7 +50,13 @@ class Router
                     $request->setAttribute($key, $match);
                 }
 
-                return (new $route->controller())($request);
+                $controller = new $route->controller();
+
+                if (is_callable($controller)) {
+                    return $controller($request);
+                }
+
+                throw new \LogicException("Controller $route->controller");
             }
         }
 

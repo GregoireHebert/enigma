@@ -15,7 +15,8 @@ class ProductFactory
         $parameters = $request->getRequests();
 
         $parameters['id'] = (string) Uuid::v4();
-        $parameters['estimation'] = $this->calculateEstimation($parameters['startingPrice'] ?? 0);
+        $parameters['startingPrice'] = (int) ($parameters['startingPrice'] ?? 0);
+        $parameters['estimation'] = $this->calculateEstimation($parameters['startingPrice']);
 
         return new Product(...$parameters);
     }

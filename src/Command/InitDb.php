@@ -9,12 +9,14 @@ use App\Security\Repository\UserRepository;
 
 class InitDb
 {
-    public function execute()
+    public function execute(): void
     {
         $userRepository = new UserRepository();
         $userRepository->createTable();
 
         $productRepository = new ProductRepository();
         $productRepository->createTable();
+
+        exit (0);
     }
 }

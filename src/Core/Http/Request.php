@@ -8,12 +8,15 @@ use App\Core\Http\Exception\UnprocessableEntityHttpException;
 
 final class Request
 {
+    /** @var array<string, mixed> */
     private array $attributes = [];
 
     private function __construct(
+        /** @var array<string, mixed> */
         private array $post,
         private string $path,
         private string $method,
+        /** @var array<string, string> */
         private array $headers = [],
     ) {
         if (($this->headers['content-type'] ?? '') === 'application/json') {
@@ -35,6 +38,10 @@ final class Request
         );
     }
 
+    /**
+     * @param array<string, string> $server
+     * @return array<string, string>
+     */
     private static function extractHeaders(array $server): array
     {
         $headers = [];
@@ -49,21 +56,24 @@ final class Request
         return $headers;
     }
 
-    public function setAttribute(string $name, $value): void
+    public function setAttribute(string $name, mixed $value): void
     {
         $this->attributes[$name] = $value;
     }
 
-    public function getAttribute(string $name, $default = null): mixed
+    public function getAttribute(string $name, mixed $default = null): mixed
     {
         return $this->attributes[$name] ?? $default;
     }
 
-    public function getRequest(string $name, $default = null): mixed
+    public function getRequest(string $name, mixed $default = null): mixed
     {
         return $this->post[$name] ?? $default;
     }
 
+    /**
+     * @return array<string, string|number>
+     */
     public function getRequests(): array
     {
         return $this->post;
@@ -71,7 +81,9 @@ final class Request
 
     public function getContent(): string
     {
-        $resource = fopen('php://input', 'rb');
+        if (false === $resource = fopen('php://input', 'rb')) {
+            return '';
+        }
 
         return stream_get_contents($resource) ?: '';
     }
