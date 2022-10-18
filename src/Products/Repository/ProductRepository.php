@@ -36,7 +36,10 @@ class ProductRepository extends Repository
         $prepare->bindParam(':id', $id);
         $prepare->setFetchMode(\PDO::FETCH_ASSOC);
         $prepare->execute();
-        $product = $prepare->fetch();
+
+        if (false === $product = $prepare->fetch()) {
+            return null;
+        }
 
         return new Product(...$product);
     }

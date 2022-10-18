@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Http\Router;
 
+use App\Core\Http\Exception\NotFoundHttpException;
 use App\Products\Controller\AddProduct;
 use App\Products\Controller\ItemProduct;
 use App\Products\Controller\ListProducts;
@@ -15,44 +16,40 @@ use App\Core\Http\Request;
 
 class Router
 {
+    /** @var array<Route>  */
+    private array $routes = [];
+
+    public function __construct()
+    {
+        $this->routes['me'] = new Route('/me', 'GET', Me::class);
+        $this->routes['login'] = new Route('/login', 'POST', Connect::class);
+        $this->routes['logout'] = new Route('/logout', 'POST', Disconnect::class);
+        $this->routes['products_add'] = new Route('/products', 'POST', AddProduct::class);
+        $this->routes['products_get_collection'] = new Route('/products', 'GET', ListProducts::class);
+        $this->routes['products_get_item'] = new Route('/products/(?<id>.*)', 'GET', ItemProduct::class);
+        $this->routes['users_add'] = new Route('/users', 'POST', UserRegister::class);
+    }
+
     public function getContent(Request $request): string
     {
         $path = $request->getPath();
         $method = $request->getMethod();
 
-        if ($path === '/') {
-            return '<h1>HOME</h1>';
+        foreach ($this->routes as $route){
+            if ($route->method === $method && preg_match("#^$route->path$#", $path, $matches)){
+                foreach ($matches as $key => $match) {
+                    // Only store marked paths. example for an id: ^/products/(?<id>.*)$
+                    if (is_numeric($key)) {
+                        continue;
+                    }
+
+                    $request->setAttribute($key, $match);
+                }
+
+                return (new $route->controller())($request);
+            }
         }
 
-        if ($path === '/users' && $method === 'POST') {
-            return (new UserRegister())($request);
-        }
-
-        if ($path === '/login' && $method === 'POST') {
-            return (new Connect())($request);
-        }
-
-        if ($path === '/logout' && $method === 'POST') {
-            return (new Disconnect())($request);
-        }
-
-        if ($path === '/me' && $method === 'GET') {
-            return (new Me())($request);
-        }
-
-        if ($path === '/products' && $method === 'POST') {
-            return (new AddProduct())($request);
-        }
-
-        if ($path === '/products' && $method === 'GET') {
-            return (new ListProducts())($request);
-        }
-
-        if (preg_match('#^/products/(?<id>.*)$#', $path, $matches) && $method === 'GET') {
-            $request->setAttribute('id', $matches['id']);
-            return (new ItemProduct())($request);
-        }
-
-        return '<h1>OUPS</h1>';
+        throw new NotFoundHttpException();
     }
 }
