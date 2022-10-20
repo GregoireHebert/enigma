@@ -10,6 +10,7 @@ use App\Products\Repository\ProductRepository;
 use App\Products\Validator\ProductValidator;
 use App\Security\Security;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -33,7 +34,7 @@ class AddProduct
         header('Content-Type: application/json');
 
         $serializer = new Serializer(
-            [new ObjectNormalizer()],
+            [new DateTimeNormalizer(), new ObjectNormalizer()],
             [new JsonEncoder()]
         );
 

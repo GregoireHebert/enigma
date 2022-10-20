@@ -6,26 +6,27 @@ namespace App\Products;
 
 use App\Core\Http\Request;
 use App\Products\Model\Product;
+use App\Products\Model\ProductInterface;
 use Symfony\Component\Uid\Uuid;
 
 class ProductFactory
 {
-    public function createProductFromRequest(Request $request): Product
+    public function createProductFromRequest(Request $request): ProductInterface
     {
         $parameters = $request->getRequests();
 
         $parameters['id'] = (string) Uuid::v4();
-        $parameters['startingPrice'] = (int) ($parameters['startingPrice'] ?? 0);
-        $parameters['estimation'] = $this->calculateEstimation($parameters['startingPrice']);
+        $parameters['estimation'] = (int) ($parameters['estimation'] ?? 0);
+        $parameters['startingPrice'] = $this->calculateStartingPrice($parameters['estimation']);
 
         return new Product(...$parameters);
     }
 
     /*
-     * Return 2/3 of the starting price
+     * Return 2/3 of the estimation to get the starting price
      */
-    private function calculateEstimation(int $startingPrice): int
+    private function calculateStartingPrice(int $estimation): int
     {
-        return (int) ceil($startingPrice * 0.66);
+        return (int) ceil($estimation * 0.66);
     }
 }

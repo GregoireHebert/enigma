@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\Bid\Repository\BidRepository;
 use App\Products\Repository\ProductRepository;
 use App\Security\Repository\UserRepository;
 
@@ -17,6 +18,9 @@ class InitDb
         $productRepository = new ProductRepository();
         $productRepository->createTable();
 
-        exit (0);
+        $bidRepository = new BidRepository();
+        $bidRepository->createTable();
+
+        exit(0);
     }
 }

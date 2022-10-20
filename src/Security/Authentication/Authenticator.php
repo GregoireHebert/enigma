@@ -9,6 +9,7 @@ use App\Security\Exception\AuthenticationException;
 use App\Security\Repository\UserRepository;
 use App\Security\Security;
 use App\Security\User;
+use App\Security\UserInterface;
 
 class Authenticator
 {
@@ -34,7 +35,7 @@ class Authenticator
     /**
      * @throws AuthenticationException
      */
-    private function validatePassword(UsernamePasswordCredential $credentials, User $user): void
+    private function validatePassword(UsernamePasswordCredential $credentials, UserInterface $user): void
     {
         if (false === password_verify($credentials->password, $user->getPassword())) {
             throw new AuthenticationException();
@@ -44,7 +45,7 @@ class Authenticator
     /**
      * @throws AuthenticationException
      */
-    private function getUser(UsernamePasswordCredential $credentials): User
+    private function getUser(UsernamePasswordCredential $credentials): UserInterface
     {
         $userRepository = new UserRepository();
 

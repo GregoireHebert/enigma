@@ -4,16 +4,26 @@ declare(strict_types=1);
 
 namespace App\Products\Model;
 
-class Product
+use App\Security\User;
+use App\Security\UserInterface;
+
+class Product implements ProductInterface
 {
     public function __construct(
         public readonly string $id,
+        private ?UserInterface $winner = null,
+        private \DateTimeImmutable $end = new \DateTimeImmutable(),
         private int $estimation = 0,
         private int $startingPrice = 0,
+        private int $finalPrice = 0,
         private string $name = '',
-        private string $description = ''
-    )
+        private string $description = '',
+    ) {
+    }
+
+    public function getId(): string
     {
+        return $this->id;
     }
 
     public function getEstimation(): int
@@ -54,5 +64,35 @@ class Product
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getWinner(): ?UserInterface
+    {
+        return $this->winner;
+    }
+
+    public function setWinner(UserInterface $winner): void
+    {
+        $this->winner = $winner;
+    }
+
+    public function getEnd(): \DateTimeImmutable
+    {
+        return $this->end;
+    }
+
+    public function setEnd(\DateTimeImmutable $end): void
+    {
+        $this->end = $end;
+    }
+
+    public function getFinalPrice(): int
+    {
+        return $this->finalPrice;
+    }
+
+    public function setFinalPrice(int $finalPrice): void
+    {
+        $this->finalPrice = $finalPrice;
     }
 }

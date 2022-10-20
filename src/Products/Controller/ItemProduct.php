@@ -8,6 +8,7 @@ use App\Core\Http\Exception\NotFoundHttpException;
 use App\Core\Http\Request;
 use App\Products\Repository\ProductRepository;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -28,7 +29,7 @@ class ItemProduct
         header('Content-Type: application/json');
 
         $serializer = new Serializer(
-            [new ObjectNormalizer()],
+            [new DateTimeNormalizer(), new ObjectNormalizer()],
             [new JsonEncoder()]
         );
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Http\Router;
 
+use App\Bid\Controller\BidProduct;
 use App\Core\Http\Exception\NotFoundHttpException;
 use App\Products\Controller\AddProduct;
 use App\Products\Controller\DeleteProduct;
@@ -27,6 +28,7 @@ class Router
         $this->routes['login'] = new Route('/login', 'POST', Connect::class);
         $this->routes['logout'] = new Route('/logout', 'POST', Disconnect::class);
         $this->routes['products_add'] = new Route('/products', 'POST', AddProduct::class);
+        $this->routes['products_item_bid_add'] = new Route('/products/(?<id>.*)/bids', 'POST', BidProduct::class);
         $this->routes['products_get_collection'] = new Route('/products', 'GET', ListProducts::class);
         $this->routes['products_get_item'] = new Route('/products/(?<id>.*)', 'GET', ItemProduct::class);
         $this->routes['products_put_item'] = new Route('/products/(?<id>.*)', 'PUT', PutProduct::class);
@@ -39,8 +41,8 @@ class Router
         $path = $request->getPath();
         $method = $request->getMethod();
 
-        foreach ($this->routes as $route){
-            if ($route->method === $method && preg_match("#^$route->path$#", $path, $matches)){
+        foreach ($this->routes as $routeName => $route) {
+            if ($route->method === $method && preg_match("#^$route->path$#", $path, $matches)) {
                 foreach ($matches as $key => $match) {
                     // Only store marked paths. example for an id: ^/products/(?<id>.*)$
                     if (is_numeric($key)) {
@@ -53,11 +55,14 @@ class Router
                 $controller = new $route->controller();
 
                 if (is_callable($controller)) {
+                    syslog(LOG_DEBUG, "route $routeName '$route->path' found for path '$path' and method '$method'");
                     return $controller($request);
                 }
 
-                throw new \LogicException("Controller $route->controller");
+                throw new \LogicException("Controller $route->controller is not callable.");
             }
+
+            syslog(LOG_DEBUG, "route '$route->path' is not valid for path '$path' and method '$method'");
         }
 
         throw new NotFoundHttpException();

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-final class User
+final class User implements UserInterface
 {
     public function __construct(
         private readonly string $id,
@@ -13,8 +13,7 @@ final class User
         private string $password,
         /** @var array<string> */
         private readonly array $roles
-    )
-    {
+    ) {
     }
 
     public function getId(): string

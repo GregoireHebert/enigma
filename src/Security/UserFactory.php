@@ -9,7 +9,7 @@ use Symfony\Component\Uid\Uuid;
 
 class UserFactory
 {
-    public function createUserFromRequest(Request $request): User
+    public function createUserFromRequest(Request $request): UserInterface
     {
         return new User(
             (string) Uuid::v4(),

@@ -14,12 +14,12 @@ class Security
         unset($_SESSION['user']);
     }
 
-    public function storeAuthenticatedUser(User $user): void
+    public function storeAuthenticatedUser(UserInterface $user): void
     {
         $_SESSION['user'] = $user;
     }
 
-    public function getUser(): ?User
+    public function getUser(): ?UserInterface
     {
         return $_SESSION['user'] ?? null;
     }

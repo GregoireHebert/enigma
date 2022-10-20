@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace App\Account\Validator;
 
-use App\Security\User;
+use App\Security\UserInterface;
 use App\Validator\ConstraintViolation;
 use App\Validator\Validator;
 
+/**
+ * @implements Validator<UserInterface>
+ */
 class UserValidator implements Validator
 {
     private const PASSWORD_REGEX = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
 
     public function validate(object $object): void
     {
-        if (!$object instanceof User) {
-            throw new \LogicException('Expected '.User::class.' object got '.$object::class);
+        if (!$object instanceof UserInterface) {
+            throw new \LogicException('Expected '.UserInterface::class.' object got '.$object::class);
         }
 
         assert(!empty($object->getUsername()), new ConstraintViolation('username', 'Username must be a non empty string.'));

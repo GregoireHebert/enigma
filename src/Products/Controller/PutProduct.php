@@ -8,7 +8,9 @@ use App\Core\Http\Exception\NotFoundHttpException;
 use App\Core\Http\Request;
 use App\Products\Repository\ProductRepository;
 use App\Products\Validator\ProductValidator;
+use App\Security\Security;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -16,6 +18,9 @@ class PutProduct
 {
     public function __invoke(Request $request): string
     {
+        $security = new Security();
+        $security->hasRole('ROLE_ADMIN');
+
         $id = $request->getAttribute('id');
 
         $productRepository = new ProductRepository();
@@ -25,10 +30,14 @@ class PutProduct
             throw new NotFoundHttpException();
         }
 
-        foreach($request->getRequests() as $propertyName => $propertyValue) {
+        foreach ($request->getRequests() as $propertyName => $propertyValue) {
             // TODO handle not accessible methods and public properties
             $methodName = sprintf('set%s', ucfirst($propertyName));
-            if (method_exists($product, $methodName)){
+            if (method_exists($product, $methodName)) {
+                if ($propertyName === 'end') {
+                    $propertyValue = new \DateTimeImmutable($propertyValue);
+                }
+
                 $product->$methodName($propertyValue);
             }
         }
@@ -43,7 +52,7 @@ class PutProduct
         header('Content-Type: application/json');
 
         $serializer = new Serializer(
-            [new ObjectNormalizer()],
+            [new DateTimeNormalizer(), new ObjectNormalizer()],
             [new JsonEncoder()]
         );
 

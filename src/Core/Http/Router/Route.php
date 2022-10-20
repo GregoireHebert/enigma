@@ -10,7 +10,6 @@ final class Route
         public readonly string $path,
         public readonly string $method,
         public readonly string $controller
-    )
-    {
+    ) {
     }
 }
