@@ -10,24 +10,24 @@ use Psr\EventDispatcher\StoppableEventInterface;
 
 class EventDispatcher implements ListenerProviderInterface, EventDispatcherInterface
 {
-    private array $listeners;
+    private array $listeners = [];
 
     public function dispatch(object $event): object
     {
-       foreach($this->getListenersForEvent($event) as $listener) {
-           $listener($event);
+        foreach ($this->getListenersForEvent($event) as $listener) {
+            $listener($event);
 
-           if ($listener instanceof StoppableEventInterface && $listener->isPropagationStopped()) {
-               return $event;
-           }
-       }
+            if ($listener instanceof StoppableEventInterface && $listener->isPropagationStopped()) {
+                return $event;
+            }
+        }
 
-       return $event;
+        return $event;
     }
 
     public function getListenersForEvent(object $event): iterable
     {
-        return $this->listeners[$event::class];
+        return $this->listeners[$event::class] ?? [];
     }
 
     public function addListener(object $listener, string $event): void

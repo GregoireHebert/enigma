@@ -10,14 +10,10 @@ use App\Products\Repository\ProductRepository;
 use App\Products\Validator\ProductValidator;
 use App\Security\Events\SecuredController;
 use App\Security\Security;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class AddProduct implements SecuredController
 {
-    public function __invoke(Request $request): string
+    public function __invoke(Request $request)
     {
         $security = new Security();
         $security->hasRole('ROLE_ADMIN');
@@ -31,14 +27,6 @@ class AddProduct implements SecuredController
         $productRepository = new ProductRepository();
         $productRepository->save($product);
 
-        http_response_code(201);
-        header('Content-Type: application/json');
-
-        $serializer = new Serializer(
-            [new DateTimeNormalizer(), new ObjectNormalizer()],
-            [new JsonEncoder()]
-        );
-
-        return $serializer->serialize($product, 'json');
+        return $product;
     }
 }

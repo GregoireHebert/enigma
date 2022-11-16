@@ -8,8 +8,7 @@ final class ControllerEvent
 {
     public function __construct(
         private $controller
-    )
-    {
+    ) {
     }
 
     public function getController(): callable

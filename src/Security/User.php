@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use Symfony\Component\Serializer\Annotation\Ignore;
+
 final class User implements UserInterface
 {
     public function __construct(
@@ -31,6 +33,7 @@ final class User implements UserInterface
         return $this->username;
     }
 
+    #[Ignore]
     public function getPassword(): string
     {
         return $this->password;

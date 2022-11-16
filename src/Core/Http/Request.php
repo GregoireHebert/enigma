@@ -56,6 +56,11 @@ final class Request
         return $headers;
     }
 
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
     public function setAttribute(string $name, mixed $value): void
     {
         $this->attributes[$name] = $value;

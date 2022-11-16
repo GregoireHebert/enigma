@@ -7,14 +7,10 @@ namespace App\Products\Controller;
 use App\Core\Http\Exception\NotFoundHttpException;
 use App\Core\Http\Request;
 use App\Products\Repository\ProductRepository;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class ItemProduct
 {
-    public function __invoke(Request $request): string
+    public function __invoke(Request $request)
     {
         $id = $request->getAttribute('id');
 
@@ -25,14 +21,6 @@ class ItemProduct
             throw new NotFoundHttpException();
         }
 
-        http_response_code(200);
-        header('Content-Type: application/json');
-
-        $serializer = new Serializer(
-            [new DateTimeNormalizer(), new ObjectNormalizer()],
-            [new JsonEncoder()]
-        );
-
-        return $serializer->serialize($product, 'json');
+        return $product;
     }
 }

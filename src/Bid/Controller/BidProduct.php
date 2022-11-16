@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class BidProduct implements SecuredController
 {
-    public function __invoke(Request $request): string
+    public function __invoke(Request $request)
     {
         // from /me
         $security = new Security();
@@ -43,14 +43,16 @@ class BidProduct implements SecuredController
         $bidRepository = new BidRepository();
         $bidRepository->save($bid);
 
-        http_response_code(201);
-        header('Content-Type: application/json');
+        return $bid;
 
-        $serializer = new Serializer(
-            [new ObjectNormalizer()],
-            [new JsonEncoder()]
-        );
-
-        return $serializer->serialize($bid, 'json');
+//        http_response_code(201);
+//        header('Content-Type: application/json');
+//
+//        $serializer = new Serializer(
+//            [new ObjectNormalizer()],
+//            [new JsonEncoder()]
+//        );
+//
+//        return $serializer->serialize($bid, 'json');
     }
 }
