@@ -36,7 +36,7 @@ class Router
         $this->routes['users_add'] = new Route('/users', 'POST', UserRegister::class);
     }
 
-    public function getContent(Request $request): string
+    public function getController(Request $request): callable
     {
         $path = $request->getPath();
         $method = $request->getMethod();
@@ -54,12 +54,12 @@ class Router
 
                 $controller = new $route->controller();
 
-                if (is_callable($controller)) {
+                if (!is_callable($controller)) {
                     syslog(LOG_DEBUG, "route $routeName '$route->path' found for path '$path' and method '$method'");
-                    return $controller($request);
+                    throw new \LogicException('Controller must be callable');
                 }
 
-                throw new \LogicException("Controller $route->controller is not callable.");
+                return $controller;
             }
 
             syslog(LOG_DEBUG, "route '$route->path' is not valid for path '$path' and method '$method'");

@@ -74,7 +74,8 @@ SQL);
     public function save(ProductInterface $product): void
     {
         $preparation = $this->connection->prepare(<<<SQL
-INSERT OR REPLACE INTO products (id, name, description, starting_price, estimation, finalPrice, end, winner) VALUES (:id, :name, :description, :starting_price, :estimation, :finalPrice, :end, :winner);
+INSERT OR REPLACE INTO products (id, name, description, starting_price, estimation, finalPrice, end, winner) 
+    VALUES (:id, :name, :description, :starting_price, :estimation, :finalPrice, :end, :winner);
 SQL);
 
         $id = $product->getId();

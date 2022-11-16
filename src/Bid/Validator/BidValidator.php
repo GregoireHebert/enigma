@@ -6,11 +6,10 @@ namespace App\Bid\Validator;
 
 use App\Bid\Model\Bid;
 use App\Bid\Repository\BidRepository;
-use App\Validator\ConstraintViolation;
-use App\Validator\Validator;
+use App\Core\Validator\Validator;
 
 /**
- * @implements Validator<Bid>
+ * @implements \App\Core\Validator\Validator<Bid>
  */
 class BidValidator implements Validator
 {
@@ -25,9 +24,9 @@ class BidValidator implements Validator
         $startingPrice = $object->getProductStartingPrice();
         $today = new \DateTimeImmutable();
 
-        assert($object->getAmount() > $startingPrice, new ConstraintViolation('amount', "Amount must be higher than the starting selling price ($startingPrice)."));
-        assert($object->getAmount() > $highestBid->getAmount(), new ConstraintViolation('amount', 'Amount must be higher than the highest bid.'));
-        assert($object->getUser()->getId() !== $highestBid->getUser()->getId(), new ConstraintViolation('user', 'You are already the higher bidder.'));
-        assert($object->getProductEnd() > $today, new ConstraintViolation('product', 'You cannot bid when the delay is passed.'));
+        assert($object->getAmount() > $startingPrice, new \App\Core\Validator\ConstraintViolation('amount', "Amount must be higher than the starting selling price ($startingPrice)."));
+        assert($object->getAmount() > $highestBid->getAmount(), new \App\Core\Validator\ConstraintViolation('amount', 'Amount must be higher than the highest bid.'));
+        assert($object->getUser()->getId() !== $highestBid->getUser()->getId(), new \App\Core\Validator\ConstraintViolation('user', 'You are already the higher bidder.'));
+        assert($object->getProductEnd() > $today, new \App\Core\Validator\ConstraintViolation('product', 'You cannot bid when the delay is passed.'));
     }
 }
