@@ -8,8 +8,8 @@ class ServiceDefinition
 {
     public function __construct(
         public readonly string $className,
-        public readonly array $arguments = []
-    )
-    {
+        public readonly array $arguments = [],
+        public ?string $decorated = null
+    ) {
     }
 }

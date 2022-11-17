@@ -7,6 +7,8 @@ namespace App\Account\Controller;
 use App\Account\Validator\UserValidator;
 use App\Core\DependencyInjection\Container;
 use App\Core\Http\Request;
+use App\Core\Logger\Logger;
+use App\Core\Logger\LoggerInterface;
 use App\Security\Repository\UserRepository;
 use App\Security\UserFactory;
 
@@ -24,6 +26,9 @@ class UserRegister
 
         $userRepository = $container->getService(UserRepository::class);
         $userRepository->save($user);
+
+        $logger = $container->getService(LoggerInterface::class);
+        $logger->debug('User created successfully.');
 
         return $user;
     }

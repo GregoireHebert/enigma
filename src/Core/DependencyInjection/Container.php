@@ -11,6 +11,8 @@ class Container
 
     private array $servicesInstances = [];
 
+    public bool $isBooted = false;
+
     /**
      * @param array<string, ServiceDefinition> $servicesDefinitions with the serviceName as Key.
      */
@@ -19,6 +21,20 @@ class Container
         foreach ($servicesDefinitions as $serviceName => $service) {
             $this->servicesDefinitions[$serviceName] = $service;
         }
+    }
+
+    public function getServiceDefinition(string $serviceName): ServiceDefinition
+    {
+        return $this->locate($serviceName);
+    }
+
+    public function setServiceDefinition(string $serviceName, ServiceDefinition $serviceDefinition)
+    {
+        if ($this->isBooted) {
+            throw new \LogicException('Container already booted, you cannot change a service');
+        }
+
+        $this->servicesDefinitions[$serviceName] = $serviceDefinition;
     }
 
     private function locate(string $serviceName): ServiceDefinition
@@ -34,7 +50,13 @@ class Container
     {
         if (!isset($this->servicesInstances[$serviceName])) {
             $service = $this->locate($serviceName);
-            $this->servicesInstances[$serviceName] = new $service->className(...$service->arguments);
+
+            if (null !== $decorator = $service->decorated) {
+                $this->servicesInstances[$serviceName. '.decorated'] = new $service->className(...$service->arguments);
+                $this->servicesInstances[$serviceName] = new $decorator($this->servicesInstances[$serviceName. '.decorated']);
+            } else {
+                $this->servicesInstances[$serviceName] = new $service->className(...$service->arguments);
+            }
         }
 
         return $this->servicesInstances[$serviceName];
