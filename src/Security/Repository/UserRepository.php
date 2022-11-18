@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Security\Repository;
 
 use App\Core\Database\Repository;
-use App\Security\User;
+use App\Security\Model\User;
 use App\Security\UserInterface;
 
 class UserRepository extends Repository

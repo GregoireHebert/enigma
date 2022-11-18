@@ -8,7 +8,6 @@ use App\Core\Http\Request;
 use App\Security\Exception\AuthenticationException;
 use App\Security\Repository\UserRepository;
 use App\Security\Security;
-use App\Security\User;
 use App\Security\UserInterface;
 
 class Authenticator

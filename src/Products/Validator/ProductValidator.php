@@ -9,9 +9,9 @@ use App\Core\Validator\Validator;
 use App\Products\Model\ProductInterface;
 
 /**
- * @implements \App\Core\Validator\Validator<ProductInterface>
+ * @implements Validator<ProductInterface>
  */
-class ProductValidator implements \App\Core\Validator\Validator
+class ProductValidator implements Validator
 {
     /**
      * @inheritDoc
@@ -22,7 +22,7 @@ class ProductValidator implements \App\Core\Validator\Validator
             throw new \LogicException('Expected '.ProductInterface::class.' object got '.$object::class);
         }
 
-        assert('' !== $object->getName(), new \App\Core\Validator\ConstraintViolation('name', 'The name cannot be empty'));
+        assert('' !== $object->getName(), new ConstraintViolation('name', 'The name cannot be empty'));
         assert('' !== $object->getDescription(), new ConstraintViolation('description', 'The description cannot be empty'));
         assert($object->getEstimation() >= 1000, new ConstraintViolation('estimation', 'The estimate price must be at least 1000 (= 1,000€)'));
     }

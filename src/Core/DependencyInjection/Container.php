@@ -52,10 +52,10 @@ class Container
             $service = $this->locate($serviceName);
 
             if (null !== $decorator = $service->decorated) {
-                $this->servicesInstances[$serviceName. '.decorated'] = new $service->className(...$service->arguments);
+                $this->servicesInstances[$serviceName. '.decorated'] = new $service->className($this, ...$service->arguments);
                 $this->servicesInstances[$serviceName] = new $decorator($this->servicesInstances[$serviceName. '.decorated']);
             } else {
-                $this->servicesInstances[$serviceName] = new $service->className(...$service->arguments);
+                $this->servicesInstances[$serviceName] = new $service->className($this, ...$service->arguments);
             }
         }
 

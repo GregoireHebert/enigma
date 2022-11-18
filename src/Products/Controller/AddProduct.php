@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Products\Controller;
 
+use App\Core\DependencyInjection\Container;
 use App\Core\Http\Request;
 use App\Products\ProductFactory;
 use App\Products\Repository\ProductRepository;
@@ -13,18 +14,18 @@ use App\Security\Security;
 
 class AddProduct implements SecuredController
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, Container $container)
     {
-        $security = new Security();
+        $security = $container->getService(Security::class);
         $security->hasRole('ROLE_ADMIN');
 
-        $productFactory = new ProductFactory();
+        $productFactory = $container->getService(ProductFactory::class);
         $product = $productFactory->createProductFromRequest($request);
 
-        $productValidator = new ProductValidator();
+        $productValidator = $container->getService(ProductValidator::class);
         $productValidator->validate($product);
 
-        $productRepository = new ProductRepository();
+        $productRepository = $container->getService(ProductRepository::class);
         $productRepository->save($product);
 
         return $product;

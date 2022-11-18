@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\Core\Http\Request;
+use App\Security\Model\User;
 use Symfony\Component\Uid\Uuid;
 
 class UserFactory

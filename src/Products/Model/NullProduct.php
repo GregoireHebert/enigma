@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Products\Model;
 
-use App\Security\NullUser;
+use App\Security\Model\NullUser;
 use App\Security\UserInterface;
 
 class NullProduct implements ProductInterface

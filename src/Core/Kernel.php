@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Core;
 
 use App\Account\Validator\UserValidator;
-use App\Core\Api\Events\SerializeListener;
-use App\Core\Api\Events\StatusHttpListener;
+use App\Api\Events\SerializeListener;
+use App\Api\Events\StatusHttpListener;
 use App\Core\DependencyInjection\ConfigurationModifier;
 use App\Core\DependencyInjection\Container;
 use App\Core\DependencyInjection\ServiceDefinition;
@@ -17,16 +17,14 @@ use App\Core\Events\RespondEvent;
 use App\Core\Http\Exception\HttpException;
 use App\Core\Http\Request;
 use App\Core\Http\Router\Router;
-use App\Core\Logger\Logger;
-use App\Core\Logger\LoggerInterface;
 use App\Core\Validator\ConstraintViolation;
 use App\Security\Events\ContentNegociationListener;
 use App\Security\Events\SecurityListener;
-use App\Security\Repository\UserRepository;
-use App\Security\UserFactory;
 
 class Kernel
 {
+    private const SERVICES_EXCLUSIONS = ['Exception', 'Model', 'Command', 'Core', '.',  '..'];
+
     private Container $container;
     private Request $request;
     private EventDispatcher $eventDispatcher;
@@ -34,17 +32,9 @@ class Kernel
 
     private function boot()
     {
-        $userFactoryService = new ServiceDefinition(UserFactory::class);
-        $userValidatorService = new ServiceDefinition(UserValidator::class);
-        $userRepositoryService = new ServiceDefinition(UserRepository::class);
-        $loggerService = new ServiceDefinition(Logger::class);
-
-        $this->container = new Container([
-            UserFactory::class => $userFactoryService,
-            UserValidator::class => $userValidatorService,
-            UserRepository::class => $userRepositoryService,
-            LoggerInterface::class => $loggerService,
-        ]);
+        $this->findServicesDefinitions(servicesDefinitions: $servicesDefinitions);
+        array_filter($servicesDefinitions);
+        $this->container = new Container($servicesDefinitions);
 
         $this->eventDispatcher = new EventDispatcher();
         $this->eventDispatcher->addListener(new ContentNegociationListener(), RequestEvent::class);
@@ -56,6 +46,53 @@ class Kernel
 
         $this->configure();
         $this->container->isBooted = true;
+    }
+
+    private function findServicesDefinitions(string $path  = PROJECT_DIR . '/src', ?array &$servicesDefinitions = [])
+    {
+        /** @var \SplFileInfo $fileInfo */
+        foreach (new \DirectoryIterator($path) as $fileInfo) {
+            $filename = $fileInfo->getFilename();
+            if (in_array($filename, self::SERVICES_EXCLUSIONS)) {
+                continue;
+            }
+
+            $filePath = $path . '/'.  $filename;
+
+            if (is_dir($filePath)) {
+                // recursive
+                $this->findServicesDefinitions($filePath, $servicesDefinitions);
+                continue;
+            }
+
+            if ($fileInfo->getExtension() !== 'php') {
+                continue;
+            }
+
+            [$prefix, $suffix] = explode('/../', $filePath);
+            $className = str_replace(['src', '/', '.php'], ['App', '\\', ''], $suffix);
+
+            if (!class_exists($className)) {
+                continue;
+            }
+
+            $reflexion = new \ReflectionClass($className);
+            $interfaces = $reflexion->getInterfaceNames();
+
+            if (count($interfaces) !== 1) {
+                $servicesDefinitions[$className] = new ServiceDefinition($className);
+            } elseif (array_key_exists($interfaces[0], $servicesDefinitions)) {
+                /** @var ServiceDefinition $removedService */
+                if (null !== $removedService = $servicesDefinitions[$interfaces[0]]) {
+                    $servicesDefinitions[$removedService->className] = new ServiceDefinition($removedService->className);
+                    $servicesDefinitions[$interfaces[0]] = null;
+                }
+
+                $servicesDefinitions[$className] = new ServiceDefinition($className);
+            } else {
+                $servicesDefinitions[$interfaces[0]] = new ServiceDefinition($className);
+            }
+        }
     }
 
     private function configure(): void

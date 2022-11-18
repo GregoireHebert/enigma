@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Account\Controller;
 
+use App\Account\Truc;
 use App\Account\Validator\UserValidator;
 use App\Core\DependencyInjection\Container;
 use App\Core\Http\Request;
-use App\Core\Logger\Logger;
 use App\Core\Logger\LoggerInterface;
 use App\Security\Repository\UserRepository;
 use App\Security\UserFactory;
@@ -17,6 +17,7 @@ class UserRegister
     public function __invoke(Request $request, Container $container)
     {
         $userFactory = $container->getService(UserFactory::class);
+
         $user = $userFactory->createUserFromRequest($request);
 
         $validator = $container->getService(UserValidator::class);

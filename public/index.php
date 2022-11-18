@@ -10,6 +10,6 @@ openlog('app', LOG_CONS|LOG_PERROR|LOG_PID, LOG_USER);
 
 use App\Core\Kernel;
 
-$kernel = new Kernel();
+(new Kernel())->handle();
 
-$kernel->handle();
+exit(0);

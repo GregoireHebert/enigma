@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Security;
+namespace App\Security\Model;
 
+use App\Security\UserInterface;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 final class User implements UserInterface

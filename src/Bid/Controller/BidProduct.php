@@ -7,52 +7,40 @@ namespace App\Bid\Controller;
 use App\Bid\BidFactory;
 use App\Bid\Repository\BidRepository;
 use App\Bid\Validator\BidValidator;
+use App\Core\DependencyInjection\Container;
 use App\Core\Http\Exception\NotFoundHttpException;
 use App\Core\Http\Request;
 use App\Products\Repository\ProductRepository;
 use App\Security\Events\SecuredController;
 use App\Security\Security;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class BidProduct implements SecuredController
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, Container $container)
     {
         // from /me
-        $security = new Security();
+        $security = $container->getService(Security::class);
         $user = $security->getUser();
 
         // from /itemProduct
         $id = $request->getAttribute('id');
 
-        $productRepository = new ProductRepository();
+        $productRepository = $container->getService(ProductRepository::class);
         $product = $productRepository->findOneById($id);
 
         if ($product === null) {
             throw new NotFoundHttpException();
         }
 
-        $bidFactory = new BidFactory();
+        $bidFactory = $container->getService(BidFactory::class);
         $bid = $bidFactory->createBidFromRequest($product, $user, $request);
 
-        $bidValidator = new BidValidator();
+        $bidValidator = $container->getService(BidValidator::class);
         $bidValidator->validate($bid);
 
-        $bidRepository = new BidRepository();
+        $bidRepository = $container->getService(BidRepository::class);
         $bidRepository->save($bid);
 
         return $bid;
-
-//        http_response_code(201);
-//        header('Content-Type: application/json');
-//
-//        $serializer = new Serializer(
-//            [new ObjectNormalizer()],
-//            [new JsonEncoder()]
-//        );
-//
-//        return $serializer->serialize($bid, 'json');
     }
 }

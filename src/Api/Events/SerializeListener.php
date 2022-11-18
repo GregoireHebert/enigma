@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Api\Events;
+namespace App\Api\Events;
 
 use App\Core\Events\RespondEvent;
 use Doctrine\Common\Annotations\AnnotationReader;

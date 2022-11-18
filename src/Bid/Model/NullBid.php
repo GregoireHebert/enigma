@@ -6,7 +6,7 @@ namespace App\Bid\Model;
 
 use App\Products\Model\NullProduct;
 use App\Products\Model\ProductInterface;
-use App\Security\NullUser;
+use App\Security\Model\NullUser;
 use App\Security\UserInterface;
 
 class NullBid implements BidInterface

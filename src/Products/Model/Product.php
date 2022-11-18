@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Products\Model;
 
-use App\Security\User;
 use App\Security\UserInterface;
 
 class Product implements ProductInterface
