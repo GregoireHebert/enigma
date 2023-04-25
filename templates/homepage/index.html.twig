@@ -24,8 +24,15 @@
         </div>
     {% endif %}
 
-    <!-- logo --><!-- recherche --><!-- compte -->
-    <!-- playlists --><!-- liste des titres -->
+    <div class="flex flex-row">
+        <div class="basis-1/4">
+            <h2>Playlists</h2>
+        </div>
+        <div class="basis-3/4">
+            {{ render(controller('App\\Controller\\SongController::index')) }}
+        </div>
+    </div>
+
     <!-- lecture en cours ? -->
 </div>
 
