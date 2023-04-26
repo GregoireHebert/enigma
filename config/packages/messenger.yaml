@@ -17,4 +17,6 @@ framework:
 
         routing:
             Symfony\Component\Mailer\Messenger\SendEmailMessage: async
-            App\Message\UserRegistration: sync
+            App\Customers\Application\Message\UserRegistration: sync
+            App\Customers\Application\Message\FindUserQuery: sync
+            App\Customers\Application\Message\VerifyUserEmail: sync

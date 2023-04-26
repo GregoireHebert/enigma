@@ -1,5 +1,11 @@
-controllers:
+customers_controllers:
     resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+        path: ../src/Customers/Infrastructure/Symfony/Controller/
+        namespace: App\Customers\Infrastructure\Symfony\Controller
+    type: attribute
+
+artists_controllers:
+    resource:
+        path: ../src/Artists/Infrastructure/Symfony/Controller/
+        namespace: App\Artists\Infrastructure\Symfony\Controller
     type: attribute
