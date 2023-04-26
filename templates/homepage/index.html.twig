@@ -5,30 +5,11 @@
 {% block body %}
 
 <div>
-    <h1>Bienvenue sur Moussaka !</h1>
-
-    {% if app.user %}
-        <div class="flex flex-row">
-            <div class="basis-3/4">Bonjour {{ app.user.displayName }}</div>
-            <div class="basis-1/4">
-                <button class="py-2 px-3 bg-red-900 text-white text-sm font-semibold rounded-md shadow focus:outline-none"> <a href="{{ path('app_logout') }}">Logout</a></button>
-            </div>
-        </div>
-    {% else %}
-        <div class="flex flex-row">
-            <div class="basis-3/4"></div>
-            <div class="basis-1/4">
-                <button class="py-2 px-3 bg-indigo-500 text-white text-sm font-semibold rounded-md shadow focus:outline-none"><a href="{{ path('app_login') }}">Se connecter</a></button>
-                <button class="py-2 px-3 bg-sky-500 text-white text-sm font-semibold rounded-md shadow focus:outline-none"><a href="{{ path('app_register') }}">Créer un compte</a></button>
-            </div>
-        </div>
-    {% endif %}
-
     <div class="flex flex-row">
-        <div class="basis-1/4">
+        <div class="basis-1/5">
             <h2>Playlists</h2>
         </div>
-        <div class="basis-3/4">
+        <div class="basis-4/5 p-5">
             {{ render(controller('App\\Controller\\SongController::index')) }}
         </div>
     </div>

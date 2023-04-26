@@ -44,6 +44,10 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            if ($form->get('artist')->getData()) {
+                $user->setRoles(['ROLE_ARTIST']);
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 

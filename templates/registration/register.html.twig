@@ -7,16 +7,48 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Création de compte</h1>
+    <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+        <section>
+            <h3 class="font-bold text-2xl">Bienvenue sur /ˈmjuːzaka/</h3>
+            <p class="text-gray-600 pt-2">Création de compte</p>
+        </section>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.displayName) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">M'enregistrer</button>
-    {{ form_end(registrationForm) }}
+        <section class="mt-10">
+            {{ form_start(registrationForm) }}
+                <div class="mb-6 pt-3 rounded bg-gray-200">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">Email</label>
+                    {{ form_row(registrationForm.email) }}
+{#                    <input type="email" value="{{ last_username }}" id="inputEmail" name="email" autocomplete="email" required autofocus class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-teal-700/70 transition duration-500 px-3 pb-3">#}
+                </div>
+                <div class="mb-6 pt-3 rounded bg-gray-200">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="displayName">Identifiant</label>
+                    {{ form_widget(registrationForm.displayName) }}
+{#                    <input type="password" name="password" id="password" autocomplete="current-password" required class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-teal-700/70 transition duration-500 px-3 pb-3">#}
+                </div>
+                <div class="mb-6 pt-3 rounded bg-gray-200">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="artist">Je suis un artiste</label>
+                    {{ form_widget(registrationForm.artist) }}
+                </div>
+                <div class="mb-6 pt-3 rounded bg-gray-200">
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+{#                    <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="password">Password</label>#}
+{#                    <input type="password" name="password" id="password" autocomplete="current-password" required class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-teal-700/70 transition duration-500 px-3 pb-3">#}
+                </div>
+                <div class="mb-6 pt-3 rounded bg-gray-200">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="password">Accepter les CGU</label>
+                    {{ form_widget(registrationForm.agreeTerms) }}
+{#                    <input type="password" name="password" id="password" autocomplete="current-password" required class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-teal-700/70 transition duration-500 px-3 pb-3">#}
+                </div>
+                <div class="flex justify-end">
+                    <a href="{{ path('app_login') }}" class="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-6">Me connecter</a>
+                </div>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <button class="bg-teal-700/70 hover:bg-teal-700 text-white font-bold p-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Créer mon compte</button>
+            {{ form_end(registrationForm) }}
+        </section>
+    </main>
 {% endblock %}

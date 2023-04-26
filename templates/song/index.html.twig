@@ -1,33 +1,37 @@
-<h1>Song index</h1>
+<div class="mt-10">
+    <!-- song list header -->
+    <div class="flex text-gray-600">
+        <div class="p-2 w-8 flex-shrink-0"></div>
+        <div class="p-2 w-8 flex-shrink-0"></div>
+        <div class="p-2 w-full">Titre</div>
+        <div class="p-2 w-full">Artiste</div>
+        <div class="p-2 w-full">Album</div>
+        <div class="p-2 w-12 flex-shrink-0 text-right">Durée</div>
+        {% if is_granted('ROLE_ARTIST') %}
+        <div class="p-2 w-12 flex-shrink-0 text-right">Action</div>
+        {% endif %}
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Duration</th>
-            <th>FilePath</th>
-            <th>actions</th>
-        </tr>
-    </thead>
-    <tbody>
     {% for song in songs %}
-        <tr>
-            <td>{{ song.id }}</td>
-            <td>{{ song.name }}</td>
-            <td>{{ song.duration }}</td>
-            <td>{{ song.filePath }}</td>
-            <td>
-                <a href="{{ path('app_song_show', {'id': song.id}) }}">show</a>
-                <a href="{{ path('app_song_edit', {'id': song.id}) }}">edit</a>
-            </td>
-        </tr>
+        <div class="flex border-b border-gray-800 hover:bg-green-700/25">
+            <div class="p-3 w-8 flex-shrink-0">▶️</div>
+            <div class="p-3 w-8 flex-shrink-0">❤️</div>
+            <div class="p-3 w-full">{{ song.name }}</div>
+            <div class="p-3 w-full">Artiste</div>
+            <div class="p-3 w-full">Album</div>
+            <div class="p-3 w-12 flex-shrink-0 text-right">{{ (song.duration/60)|number_format(2, "'") }}</div>
+            {% if is_granted('ROLE_ARTIST') %}
+                <div class="p-3 w-12 flex-shrink-0 text-right"><a href="{{ path('app_song_edit', {'id': song.id}) }}">edit</a></div>
+            {% endif %}
+        </div>
     {% else %}
-        <tr>
-            <td colspan="5">no records found</td>
-        </tr>
+        <div class="flex border-b border-gray-800 hover:bg-gray-800">
+            <p>Aucun titre</p>
+        </div>
     {% endfor %}
-    </tbody>
-</table>
+</div>
 
-<a href="{{ path('app_song_new') }}">Create new</a>
+
+{% if is_granted('ROLE_ARTIST') %}
+    <button class="bg-teal-700/70 hover:bg-teal-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 p-2 m-2"><a href="{{ path('app_song_new') }}">Create new</a></button>
+{% endif %}

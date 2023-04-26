@@ -33,7 +33,7 @@ class SongController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $songRepository->save($song, true);
 
-            return $this->redirectToRoute('app_song_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_homepage', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('song/new.html.twig', [
@@ -60,7 +60,7 @@ class SongController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $songRepository->save($song, true);
 
-            return $this->redirectToRoute('app_song_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_homepage', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('song/edit.html.twig', [
@@ -77,6 +77,6 @@ class SongController extends AbstractController
             $songRepository->remove($song, true);
         }
 
-        return $this->redirectToRoute('app_song_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_homepage', [], Response::HTTP_SEE_OTHER);
     }
 }
