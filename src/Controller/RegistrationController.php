@@ -4,15 +4,15 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Message\UserRegistration;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -21,11 +21,8 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    private EmailVerifier $emailVerifier;
-
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(private EmailVerifier $emailVerifier, private MessageBusInterface $messageBus)
     {
-        $this->emailVerifier = $emailVerifier;
     }
 
     #[Route('/register', name: 'app_register')]
@@ -51,15 +48,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('registration@moussaka.local', 'moussaka'))
-                    ->to($user->getEmail())
-                    ->subject('Merci de confirmer votre email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
-            // do anything else you need here, like send an email
+            $this->messageBus->dispatch(new UserRegistration($user));
 
             return $userAuthenticator->authenticateUser(
                 $user,
