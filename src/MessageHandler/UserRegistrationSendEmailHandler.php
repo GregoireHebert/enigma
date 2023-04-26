@@ -8,7 +8,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Mime\Address;
 
-#[AsMessageHandler]
+#[AsMessageHandler(priority: 16)]
 final class UserRegistrationSendEmailHandler
 {
     public function __construct(private EmailVerifier $emailVerifier)
