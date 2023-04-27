@@ -3,11 +3,16 @@
 {% block title %}Modifier {{ song.name }}{% endblock %}
 
 {% block body %}
-    <h1>Edit {{ song.name }}</h1>
+<main class="bg-white mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+    <section>
+        <h3 class="font-bold text-2xl">Modifier {{ song.name }}</h3>
+    </section>
 
-    {{ include('song/_form.html.twig', {'button_label': 'Update'}) }}
+    <section class="mt-10">
+        {{ include('song/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_homepage') }}">Accueil</a>
+        {{ include('song/_delete_form.html.twig') }}
+    </section>
+</main>
 
-    {{ include('song/_delete_form.html.twig') }}
 {% endblock %}

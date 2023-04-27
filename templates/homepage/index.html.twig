@@ -3,18 +3,5 @@
 {% block title %}Bienvenue sur Moussaka !{% endblock %}
 
 {% block body %}
-
-<div>
-    <div class="flex flex-row">
-        <div class="basis-1/5">
-            <h2>Playlists</h2>
-        </div>
-        <div class="basis-4/5 p-5">
-            {{ render(controller('App\\Artists\\Infrastructure\\Symfony\\Controller\\SongController::index')) }}
-        </div>
-    </div>
-
-    <!-- lecture en cours ? -->
-</div>
-
+    {{ render(controller('App\\Artists\\Infrastructure\\Symfony\\Controller\\SongController::index')) }}
 {% endblock %}

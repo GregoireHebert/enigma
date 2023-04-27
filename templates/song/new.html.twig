@@ -3,9 +3,15 @@
 {% block title %}Nouveau titre{% endblock %}
 
 {% block body %}
-    <h1>Créer un nouveau titre</h1>
+    <main class="bg-white mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+        <section>
+            <h3 class="font-bold text-2xl">Ajouter un titre</h3>
+        </section>
 
-    {{ include('song/_form.html.twig') }}
+        <section class="mt-10">
+            {{ include('song/_form.html.twig') }}
+        </section>
+    </main>
 
-    <a href="{{ path('app_homepage') }}">Accueil</a>
+
 {% endblock %}
