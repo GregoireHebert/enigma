@@ -24,3 +24,4 @@ framework:
             App\Artists\Application\Messages\GetAlbumsQuery: sync
             App\Artists\Application\Messages\ProcessAlbumCommand: sync
             App\Artists\Application\Messages\DeleteAlbumCommand: sync
+            App\Artists\Application\Messages\GetArtistQuery: sync

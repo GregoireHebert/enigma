@@ -19,8 +19,8 @@
             <div class="flex border-b border-gray-800 hover:bg-green-700/25">
                 <div class="p-3 w-8 flex-shrink-0">▶️</div>
                 <div class="p-3 w-8 flex-shrink-0">❤️</div>
-                <div class="p-3 w-full">{{ album.name }}</div>
-                <div class="p-3 w-full">{{ album.artist.name }}</div>
+                <div class="p-3 w-full"><a href="{{ path('app_album_show', {'id': album.id}) }}">{{ album.name }}</a></div>
+                <div class="p-3 w-full"><a href="{{ path('app_artist_show', {'id': album.artist.id}) }}">{{ album.artist.name }}</a></div>
                 {% if is_granted('ROLE_ARTIST') %}
                     <div class="p-3 w-32 flex-shrink-0 text-right">
                         <a href="{{ path('app_album_edit', {'id': album.id}) }}">✍modifier</a>
