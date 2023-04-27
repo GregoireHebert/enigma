@@ -2,7 +2,10 @@
 
 namespace App\Customers\Domain\Entity;
 
+use App\Artists\Domain\Entity\Artist;
 use App\Customers\Domain\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,7 +37,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $displayName = null;
 
     #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
+    private bool $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Artist::class, cascade: ['persist'])]
+    private Collection $artists;
+
+    public function __construct()
+    {
+        $this->artists = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,5 +139,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isVerified = $isVerified;
 
         return $this;
+    }
+
+    public function getArtists(): Collection
+    {
+        return $this->artists;
+    }
+
+    public function setArtists(Collection $artists): void
+    {
+        $this->artists = $artists;
+    }
+
+    public function addArtist(Artist $artist) : void
+    {
+        $this->artists->add($artist);
     }
 }
