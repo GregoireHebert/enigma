@@ -17,8 +17,8 @@
             <div class="p-3 w-8 flex-shrink-0">▶️</div>
             <div class="p-3 w-8 flex-shrink-0">❤️</div>
             <div class="p-3 w-full">{{ song.name }}</div>
-            <div class="p-3 w-full">Artiste</div>
-            <div class="p-3 w-full">Album</div>
+            <div class="p-3 w-full">{{ song.album.artist.name|default('n/a') }}</div>
+            <div class="p-3 w-full">{{ song.album.name|default('n/a') }}</div>
             <div class="p-3 w-64 flex-shrink-0 text-right">{{ (song.duration/60)|number_format(2, "'") }}</div>
             {% if is_granted('ROLE_ARTIST') %}
                 <div class="p-3 w-32 flex-shrink-0 text-right"><a href="{{ path('app_song_edit', {'id': song.id}) }}">✍️edit</a></div>
@@ -33,5 +33,5 @@
 
 
 {% if is_granted('ROLE_ARTIST') %}
-    <button class="bg-teal-700/70 hover:bg-teal-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 p-2 m-2"><a href="{{ path('app_song_new') }}">Create new</a></button>
+    <button class="bg-teal-700/70 hover:bg-teal-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 p-2 m-2"><a href="{{ path('app_song_new') }}">Nouveau titre</a></button>
 {% endif %}

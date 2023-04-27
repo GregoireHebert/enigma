@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Albums{% endblock %}
+
+{% block body %}
+    <div class="mt-10">
+        <!-- song list header -->
+        <div class="flex text-gray-600">
+            <div class="p-2 w-8 flex-shrink-0"></div>
+            <div class="p-2 w-8 flex-shrink-0"></div>
+            <div class="p-2 w-full">Nom</div>
+            <div class="p-2 w-full">Artiste</div>
+            {% if is_granted('ROLE_ARTIST') %}
+                <div class="p-2 w-32 flex-shrink-0 text-right">Action</div>
+            {% endif %}
+        </div>
+
+        {% for album in albums %}
+            <div class="flex border-b border-gray-800 hover:bg-green-700/25">
+                <div class="p-3 w-8 flex-shrink-0">▶️</div>
+                <div class="p-3 w-8 flex-shrink-0">❤️</div>
+                <div class="p-3 w-full">{{ album.name }}</div>
+                <div class="p-3 w-full">{{ album.artist.name }}</div>
+                {% if is_granted('ROLE_ARTIST') %}
+                    <div class="p-3 w-32 flex-shrink-0 text-right">
+                        <a href="{{ path('app_album_edit', {'id': album.id}) }}">✍modifier</a>
+                    </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="flex border-b border-gray-800">
+                <p>Aucun album</p>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    {% if is_granted('ROLE_ARTIST') %}
+        <button class="bg-teal-700/70 hover:bg-teal-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 p-2 m-2"><a href="{{ path('app_album_new') }}">Nouvel album</a></button>
+    {% endif %}
+{% endblock %}

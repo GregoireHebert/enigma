@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_album_delete', {'id': album.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ album.id) }}">
+    <button class="bg-teal-700/30 hover:bg-teal-700/70 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 p-2 m-2">Supprimer</button>
+</form>

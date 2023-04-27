@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel album{% endblock %}
+
+{% block body %}
+    <main class="bg-white mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+        <section>
+            <h3 class="font-bold text-2xl">Ajouter un album</h3>
+        </section>
+
+        <section class="mt-10">
+            {{ include('album/_form.html.twig') }}
+        </section>
+    </main>
+{% endblock %}

@@ -5,15 +5,23 @@ namespace App\Artists\Infrastructure\Symfony\Controller;
 use App\Artists\Domain\Entity\Song;
 use App\Artists\Domain\Repository\SongRepository;
 use App\Artists\Infrastructure\Symfony\Form\SongType;
+use App\Artists\Infrastructure\Symfony\Helpers\UserHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/song')]
 class SongController extends AbstractController
 {
+    use UserHelper;
+
+    public function __construct(private MessageBusInterface $messageBus)
+    {
+    }
+
     #[Route('/', name: 'app_song_index', methods: ['GET'])]
     public function index(SongRepository $songRepository): Response
     {
@@ -27,7 +35,7 @@ class SongController extends AbstractController
     public function new(Request $request, SongRepository $songRepository): Response
     {
         $song = new Song();
-        $form = $this->createForm(SongType::class, $song);
+        $form = $this->createForm(SongType::class, $song, ['user' => $this->getDomainUser()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -54,7 +62,7 @@ class SongController extends AbstractController
     #[IsGranted('ROLE_ARTIST')]
     public function edit(Request $request, Song $song, SongRepository $songRepository): Response
     {
-        $form = $this->createForm(SongType::class, $song);
+        $form = $this->createForm(SongType::class, $song, ['user' => $this->getDomainUser()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

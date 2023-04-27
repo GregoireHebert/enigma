@@ -20,3 +20,7 @@ framework:
             App\Customers\Application\Message\UserRegistration: sync
             App\Customers\Application\Message\FindUserQuery: sync
             App\Customers\Application\Message\VerifyUserEmail: sync
+            App\Artists\Application\Messages\GetAuthArtistAlbumsQuery: sync
+            App\Artists\Application\Messages\GetAlbumsQuery: sync
+            App\Artists\Application\Messages\ProcessAlbumCommand: sync
+            App\Artists\Application\Messages\DeleteAlbumCommand: sync

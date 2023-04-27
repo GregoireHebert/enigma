@@ -141,6 +141,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection<Artist>
+     */
     public function getArtists(): Collection
     {
         return $this->artists;

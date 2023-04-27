@@ -65,10 +65,12 @@
                     </div>
                     {% if is_granted('ROLE_ARTIST') %}
                     <div class="flex font-medium items-center px-4 py-2 rounded text-sm text-gray-100 hover:text-white uppercase tracking-widest hover:cursor-pointer">
-                        <svg class="h-6 mr-4" viewBox="0 0 512 512" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <a href="{{ path('app_album_artist_index') }}" class="w-full block">
+                        <svg class="h-6 mr-4 inline" viewBox="0 0 512 512" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M291.301 81.778l166.349 373.587-19.301 8.635-166.349-373.587zM64 463.746v-384h21.334v384h-21.334zM192 463.746v-384h21.334v384h-21.334z" fill="currentColor"></path>
                         </svg>
-                        Vos titres
+                        Albums
+                        </a>
                     </div>
                     {% endif %}
                 </div>

@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('app_song_delete', {'id': song.id}) }}" onsubmit="return confirm('Êtes vous sûr ?');" class="inline-block">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ song.id) }}">
 
-    <button class="bg-teal-700/30 hover:bg-teal-700/70 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 p-2 m-2">Delete</button>
+    <button class="bg-teal-700/30 hover:bg-teal-700/70 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 p-2 m-2">Supprimer</button>
 </form>

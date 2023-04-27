@@ -1,36 +1,34 @@
 <?php
 
-namespace App\Artists\Domain\Entity;
+namespace App\Artists\Infrastructure\Model;
 
-use App\Artists\Domain\Repository\SongRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 
-#[ORM\Entity(repositoryClass: SongRepository::class)]
 class Song
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column]
     private ?int $duration = null;
 
-    #[ORM\Column(length: 255)]
     private ?string $filePath = null;
 
     private ?File $file = null;
 
-    #[ORM\ManyToOne(inversedBy: 'songs')]
     private ?Album $album = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getName(): ?string
@@ -95,5 +93,20 @@ class Song
         $this->album = $album;
 
         return $this;
+    }
+
+    public static function fromDomain(\App\Artists\Domain\Entity\Song $song, ?Album $album = null)
+    {
+        $self = new self();
+        $self->setId($song->getId());
+        $self->setName($song->getName());
+        $self->setDuration($song->getDuration());
+        $self->setFilePath($song->getFilePath());
+
+        if ($album instanceof Album) {
+            $self->setAlbum($album);
+        }
+
+        return $self;
     }
 }
