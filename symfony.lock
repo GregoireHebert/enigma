@@ -162,6 +162,18 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/mercure-bundle": {
+        "version": "0.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "0.3",
+            "ref": "851667ac03fd113c5bd2215fb743974f6709bc62"
+        },
+        "files": [
+            "config/packages/mercure.yaml"
+        ]
+    },
     "symfony/messenger": {
         "version": "6.2",
         "recipe": {
@@ -275,6 +287,9 @@
         "files": [
             "config/packages/uid.yaml"
         ]
+    },
+    "symfony/ux-turbo": {
+        "version": "v2.7.1"
     },
     "symfony/validator": {
         "version": "6.2",

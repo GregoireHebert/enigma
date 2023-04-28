@@ -14,7 +14,10 @@
 
     {% for song in songs %}
         <div class="flex border-b border-gray-800 hover:bg-green-700/25">
-            <div class="p-3 w-8 flex-shrink-0">▶️</div>
+            <div class="p-3 w-8 flex-shrink-0" {{ stimulus_controller('play') }}>
+                <input type="hidden" {{ stimulus_target('play', 'song') }} value="{{ song.id }}">
+                <a href="#" class="pointer" {{ stimulus_action('play', 'play') }}>▶</a>️
+            </div>
             <div class="p-3 w-8 flex-shrink-0">❤️</div>
             <div class="p-3 w-full">{{ song.name }}</div>
             <div class="p-3 w-full"><a href="{{ path('app_artist_show', {'id': song.album.artist.id}) }}">{{ song.album.artist.name|default('n/a') }}</a></div>
