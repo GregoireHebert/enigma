@@ -39,6 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private bool $isVerified = false;
 
+    /**
+     * @var Collection<Artist>|ArrayCollection<Artist>
+     */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Artist::class, cascade: ['persist'])]
     private Collection $artists;
 

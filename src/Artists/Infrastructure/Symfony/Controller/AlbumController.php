@@ -3,10 +3,9 @@
 namespace App\Artists\Infrastructure\Symfony\Controller;
 
 use App\Artists\Application\Messages\DeleteAlbumCommand;
+use App\Artists\Application\Messages\GetAuthArtistAlbumsQuery;
 use App\Artists\Application\Messages\ProcessAlbumCommand;
 use App\Artists\Application\Messages\GetAlbumQuery;
-use App\Artists\Application\Messages\GetAlbumsQuery;
-use App\Artists\Infrastructure\Model\Artist;
 use App\Artists\Infrastructure\Symfony\Form\AlbumType;
 use App\Artists\Infrastructure\Symfony\Helpers\UserHelper;
 use App\Artists\Infrastructure\Model\Album;
@@ -32,7 +31,7 @@ class AlbumController extends AbstractController
     #[Route('/', name: 'app_album_index', methods: ['GET'])]
     public function index(): Response
     {
-        $enveloppe = $this->messageBus->dispatch(new GetAlbumsQuery());
+        $enveloppe = $this->messageBus->dispatch(new GetAuthArtistAlbumsQuery($this->getDomainUser()));
         $stamp = $enveloppe->last(HandledStamp::class);
 
         return $this->render('album/index.html.twig', [
@@ -54,7 +53,7 @@ class AlbumController extends AbstractController
             return $this->redirectToRoute('app_album_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('album/new.html.twig', [
+        return $this->render('album/new.html.twig', [
             'album' => $album,
             'form' => $form,
         ]);
@@ -88,7 +87,7 @@ class AlbumController extends AbstractController
             return $this->redirectToRoute('app_album_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('album/edit.html.twig', [
+        return $this->render('album/edit.html.twig', [
             'album' => $album,
             'form' => $form,
         ]);

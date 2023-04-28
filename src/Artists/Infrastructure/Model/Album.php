@@ -21,7 +21,7 @@ class Album
         $this->songs = new ArrayCollection();
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
