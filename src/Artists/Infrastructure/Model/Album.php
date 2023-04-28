@@ -12,7 +12,6 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
-    shortName: 'album',
     operations: [
         new Get(),
         new GetCollection()

@@ -4,12 +4,23 @@ declare(strict_types=1);
 
 namespace App\Artists\Infrastructure\Model;
 
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Customers\Domain\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection()
+    ]
+)]
 class Artist
 {
+    #[ApiProperty(identifier: true)]
     private ?string $id = null;
 
     private ?string $name = null;
