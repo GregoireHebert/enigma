@@ -8,7 +8,7 @@ use App\Customers\Domain\Entity\User;
 
 class GetAlbumsQuery
 {
-    public function __construct(public readonly User $user)
+    public function __construct()
     {
     }
 }

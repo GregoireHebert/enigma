@@ -2,18 +2,36 @@
 
 namespace App\Artists\Infrastructure\Model;
 
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use App\Artists\Infrastructure\ApiPlatform\State\Provider\AlbumProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Uid\UuidV4;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[ApiResource(
+    shortName: 'album',
+    operations: [
+        new Get(),
+        new GetCollection()
+    ],
+    normalizationContext: ['groups' => ['Album:Read']],
+    provider: AlbumProvider::class
+)]
 class Album
 {
+    #[ApiProperty(identifier: true)]
     private ?string $id = null;
 
+    #[Groups('Album:Read')]
     private ?string $name = null;
 
+    #[Groups('Album:Read')]
     private ?Artist $artist = null;
 
+    #[Groups('Album:Read')]
     private Collection $songs;
 
     public function __construct()
